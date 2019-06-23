@@ -13,7 +13,7 @@
         {% endunless %}
         <a class="site-title" href="{{ '/' | relative_url }}">{{ site.masthead_title | default: site.title }}</a>
         <ul class="visible-links">
-          {%- for link in site.data.navigation.main -%}
+          {%- for link in site.data.navigation.main[include.lang] -%}
             {%- if link.url contains '://' -%}
               {%- assign url = link.url -%}
             {%- else -%}
@@ -37,6 +37,9 @@
           <div class="navicon"></div>
         </button>
         <ul class="hidden-links hidden"></ul>
+
+        {% include language-selector.html %}
+      
       </nav>
     </div>
   </div>

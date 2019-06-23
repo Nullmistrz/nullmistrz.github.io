@@ -1,0 +1,19 @@
+<ul>
+{% assign posts=site.posts | where:"ref", include.ref | sort: 'lang' %}
+{% for post in posts %}
+  {% if post.lang != include.lang %}
+    <li>
+      <a href="{{ site.baseurl }}{{ post.url }}" class="{{ post.lang }}">{{ site.data.languages[post.lang].icon }}</a>
+    </li>
+  {% endif %}
+{% endfor %}
+
+{% assign pages=site.pages | where:"ref", include.ref | sort: 'lang' %}
+{% for page in pages %}
+  {% if page.lang != include.lang %}
+    <li>
+      <a href="{{ site.baseurl }}{{ page.url }}" class="{{ page.lang }}">{{ site.data.languages[page.lang].icon }}</a>
+    </li>
+  {% endif %}
+{% endfor %}
+</ul>
