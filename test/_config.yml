@@ -10,8 +10,9 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Minimal Mistakes Development Test Site"
+title                    : "Minimal Mistakes"
 title_separator          : "-"
+subtitle                 : "Development Test Site"
 name                     : "Your Name"
 description              : "Minimal Mistakes theme test."
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
@@ -95,7 +96,7 @@ analytics:
 author:
   name             : "Your Name"
   avatar           : "/assets/images/bio-photo.jpg"
-  bio              : "I am an amazing person."
+  bio              : "I am an **amazing** person."
   location         : "Somewhere"
   links:
     - label: "Your Website"
