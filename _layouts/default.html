@@ -8,16 +8,16 @@
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
-<html lang="{{ page.lang | slice: 0,2 | default: "en"}}" class="no-js">
+<html lang="{{ page.locale | slice: 0,2 | default: "en"}}" class="no-js">
   <head>
     {% include head.html %}
     {% include head/custom.html %}
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
-    {% include_cached skip-links.html lang=page.lang %}
+    {% include_cached skip-links.html locale=page.locale %}
     {% include_cached browser-upgrade.html %}
-    {% include_cached masthead.html lang=page.lang id=page.id %}
+    {% include_cached masthead.html locale=page.locale id=page.id %}
 
     <div class="initial-content">
       {{ content }}
@@ -25,14 +25,14 @@
 
     {% if site.search == true %}
       <div class="search-content">
-        {% include_cached search/search_form.html lang=page.lang %}
+        {% include_cached search/search_form.html locale=page.locale %}
       </div>
     {% endif %}
 
     <div id="footer" class="page__footer">
       <footer>
         {% include footer/custom.html %}
-        {% include_cached footer.html lang=page.lang %}
+        {% include_cached footer.html locale=page.locale %}
       </footer>
     </div>
 

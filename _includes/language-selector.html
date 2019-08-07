@@ -1,18 +1,18 @@
 <ul>
-{% assign posts=site.posts | where:"id", include.id | sort: 'lang' %}
+{% assign posts=site.posts | where:"id", include.id | sort: 'locale' %}
 {% for post in posts %}
-  {% if post.lang != include.lang %}
+  {% if post.locale != include.locale %}
     <li>
-      <a href="{{ site.baseurl }}{{ post.url }}" class="{{ post.lang }}">{{ site.data.languages[post.lang].icon }}</a>
+      <a href="{{ site.baseurl }}{{ post.url }}" class="{{ post.locale }}">{{ site.data.languages[post.locale].icon }}</a>
     </li>
   {% endif %}
 {% endfor %}
 
-{% assign pages=site.pages | where:"id", include.id | sort: 'lang' %}
+{% assign pages=site.pages | where:"id", include.id | sort: 'locale' %}
 {% for page in pages %}
-  {% if page.lang != include.lang %}
+  {% if page.locale != include.locale %}
     <li>
-      <a href="{{ site.baseurl }}{{ page.url }}" class="{{ page.lang }}">{{ site.data.languages[page.lang].icon }}</a>
+      <a href="{{ site.baseurl }}{{ page.url }}" class="{{ page.locale }}">{{ site.data.languages[page.locale].icon }}</a>
     </li>
   {% endif %}
 {% endfor %}
