@@ -1,7 +1,7 @@
 ---
 title: "Beispielseite"
 lang: de
-ref: sample-page
+id: sample-page
 permalink: /de/sample-page/
 date: 2016-02-24T03:02:20+00:00
 ---

@@ -1,5 +1,5 @@
 <ul>
-{% assign posts=site.posts | where:"ref", include.ref | sort: 'lang' %}
+{% assign posts=site.posts | where:"id", include.id | sort: 'lang' %}
 {% for post in posts %}
   {% if post.lang != include.lang %}
     <li>
@@ -8,7 +8,7 @@
   {% endif %}
 {% endfor %}
 
-{% assign pages=site.pages | where:"ref", include.ref | sort: 'lang' %}
+{% assign pages=site.pages | where:"id", include.id | sort: 'lang' %}
 {% for page in pages %}
   {% if page.lang != include.lang %}
     <li>
