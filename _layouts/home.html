@@ -13,7 +13,9 @@ layout: archive
 {% endif %}
 
 {% for post in posts %}
-  {% include archive-single.html %}
+  {% if post.locale == page.locale %}
+    {% include archive-single.html %}
+  {% endif %}
 {% endfor %}
 
 {% include paginator.html %}
