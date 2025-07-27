@@ -1,0 +1,8 @@
+---
+---
+<h2>DEBUG: Wszystkie strony (site.pages)</h2>
+<ul>
+{% for p in site.pages %}
+  <li>ID: {{ p.id }} | URL: {{ p.url }} | Locale: {{ p.locale }}</li>
+{% endfor %}
+</ul>

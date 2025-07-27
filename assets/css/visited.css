@@ -1,0 +1,8 @@
+/* Styl dla odwiedzonych linków do postów */
+.entries-list a:visited,
+.entries a:visited,
+.archive__item-title a:visited,
+.masthead__menu-item a:visited {
+  color: #7a3cff; /* fioletowy lub inny wyróżniający kolor */
+  opacity: 0.7;
+}

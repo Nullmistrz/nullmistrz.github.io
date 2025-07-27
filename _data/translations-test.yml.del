@@ -1,0 +1,8 @@
+# Przykładowa mapa tłumaczeń dla testu duplikatów
+# Każdy wpis to unikalny id sekcji/strony, a pod nim mapowanie locale → url
+posts-index:
+  en-US: /posts/
+  pl-PL: /pl/posts/
+home:
+  en-US: /
+  pl-PL: /pl/

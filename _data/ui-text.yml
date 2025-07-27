@@ -3,6 +3,7 @@
 # English (default)
 # -----------------
 en: &DEFAULT_EN
+  read_time_prefix           : "Reading time: "
   skip_links                 : "Skip links"
   skip_primary_nav           : "Skip to primary navigation"
   skip_content               : "Skip to content"
@@ -61,6 +62,7 @@ en-AU:
 # Spanish
 # -------
 es: &DEFAULT_ES
+  read_time_prefix           : "Tiempo de lectura: "
   skip_links                 : "Saltar enlaces"
   skip_primary_nav           : "Saltar a navegación principal"
   skip_content               : "Saltar a contenido"
@@ -115,6 +117,7 @@ es-CO:
 # French
 # ------
 fr: &DEFAULT_FR
+  read_time_prefix           : "Temps de lecture : "
   skip_links                 :
   skip_primary_nav           :
   skip_content               :
@@ -171,6 +174,7 @@ fr-CH:
 # Turkish
 # -------
 tr: &DEFAULT_TR
+  read_time_prefix           : "Okuma süresi: "
   skip_links                 :
   skip_primary_nav           :
   skip_content               :
@@ -1044,6 +1048,7 @@ da-DK:
 # Polish
 # ------
 pl: &DEFAULT_PL
+  read_time_prefix           : "Czas czytania posta: "
   skip_links                 :
   skip_primary_nav           :
   skip_content               :

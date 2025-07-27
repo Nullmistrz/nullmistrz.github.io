@@ -7,7 +7,7 @@
         {% unless logo_path == empty %}
           <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt=""></a>
         {% endunless %}
-        <a class="site-title" href="{{ '/' | relative_url }}">
+        <a class="site-title" href="{% if page.locale == 'pl-PL' %}/pl/{% else %}/{% endif %}">
           {{ site.masthead_title | default: site.title }}
           {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
         </a>
@@ -23,6 +23,37 @@
             </li>
           {%- endfor -%}
         </ul>
+        <button id="hamburger-menu" class="masthead__menu-item" aria-label="More menu" style="background:none;border:none;font-size:1.5em;cursor:pointer;">&#9776;</button>
+        <ul class="hidden-links" id="hidden-menu" style="display:none;position:absolute;right:0;background:#fff;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+          {%- for link in site.data.navigation[page.locale].more -%}
+            {%- if link.url contains '://' -%}
+              {%- assign url = link.url -%}
+            {%- else -%}
+              {%- assign url = link.url | relative_url -%}
+            {%- endif -%}
+            <li class="masthead__menu-item">
+              <a href="{{ url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var btn = document.getElementById('hamburger-menu');
+          var menu = document.getElementById('hidden-menu');
+          if(btn && menu) {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+            };
+            document.body.addEventListener('click', function() {
+              menu.style.display = 'none';
+            });
+            menu.addEventListener('click', function(e) {
+              e.stopPropagation();
+            });
+          }
+        });
+        </script>
         {% if site.search == true %}
         <button class="search__toggle" type="button">
           <span class="visually-hidden">{{ site.data.ui-text[include.locale].search_label | default: "Toggle search" }}</span>
@@ -37,7 +68,7 @@
         </button>
         <ul class="hidden-links hidden"></ul>
 
-        {% include language-selector.html locale=include.locale id=include.id %}
+        {% include language-selector.html locale=page.locale id=page.id %}
 
       </nav>
     </div>

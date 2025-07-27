@@ -1,0 +1,15 @@
+---
+layout: default
+title: "Sitemap"
+permalink: /sitemap/
+id: sitemap-index
+locale: en-US
+---
+
+<ul>
+  {% for page in site.pages %}
+    {% if page.title and page.published != false and page.sitemap != false and page.url != '/404.html' %}
+      <li><a href="{{ page.url | relative_url }}">{{ page.title }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
