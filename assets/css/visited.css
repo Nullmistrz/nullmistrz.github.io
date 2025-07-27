@@ -1,14 +1,8 @@
+
 .archive__item-title a[rel="permalink"]:link {
   color: #111 !important;
 }
 .archive__item-title a[rel="permalink"]:visited {
   color: #888 !important;
-}
-/* Styl dla odwiedzonych linków do postów */
-.entries-list a:visited,
-.entries a:visited,
-.archive__item-title a:visited,
-.masthead__menu-item a:visited {
-  color: #7a3cff; /* fioletowy lub inny wyróżniający kolor */
-  opacity: 0.7;
+  opacity: 1 !important;
 }
