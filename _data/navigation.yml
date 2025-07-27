@@ -2,22 +2,26 @@
 en-US:
   main:
     - title: "Home"
-      url: /
+      url: /en/
     - title: "Posts"
-      url: /posts/
+      url: /en/posts/
+    #- title: "Style Demo"
+    #  url: /style-demo/
   more:
     - title: "About"
-      url: /about/
+      url: /en/about/
     - title: "Sitemap"
       url: /sitemap/
-    # - title: "pl-PL"
-    #   url: /pl/
+    #- title: "pl-PL"
+    #  url: /pl/
 pl-PL:
   main:
     - title: "Strona główna"
       url: /pl/
     - title: "Posty"
       url: /pl/posts/
+    #- title: "Style Demo"
+    #  url: /style-demo/
   more:
     - title: "O mnie"
       url: /pl/about/

@@ -1,0 +1,53 @@
+---
+layout: single
+title: "Style Demo"
+permalink: /style-demo/
+id: style-demo
+---
+
+<h2>Minimal Mistakes: Przykładowe style linków</h2>
+
+<script>
+  // Prosta ochrona hasłem (tylko frontend, nie chroni przed wejściem przez źródło)
+  var hasAccess = sessionStorage.getItem('styleDemoAccess');
+  if (!hasAccess) {
+    var pass = prompt('Podaj hasło, aby zobaczyć tę stronę:');
+    if (pass !== 'Haslo123!') {
+      document.body.innerHTML = '<h2>Brak dostępu</h2>';
+    } else {
+      sessionStorage.setItem('styleDemoAccess', '1');
+    }
+  }
+</script>
+
+<p><a href="#" class="btn">Przycisk .btn</a></p>
+<p><a href="#" class="btn btn--primary">Przycisk .btn--primary</a></p>
+<p><a href="#" class="btn btn--inverse">Przycisk .btn--inverse</a></p>
+<p><a href="#" class="btn btn--light-outline">Przycisk .btn--light-outline</a></p>
+<p><a href="#" class="btn btn--success">Przycisk .btn--success</a></p>
+<p><a href="#" class="btn btn--warning">Przycisk .btn--warning</a></p>
+<p><a href="#" class="btn btn--danger">Przycisk .btn--danger</a></p>
+
+<p>Standardowy link: <a href="#">Zwykły link</a></p>
+<p>Link z ikoną: <a href="#"><i class="fas fa-link"></i> Link z ikoną</a></p>
+
+<p><a href="#" class="btn btn--primary"><i class="fas fa-arrow-right"></i> Przycisk z ikoną</a></p>
+
+<h3>Przyciski z różnymi ikonami i kolorami</h3>
+<p><a href="#" class="btn btn--success"><i class="fas fa-check"></i> Sukces</a></p>
+<p><a href="#" class="btn btn--danger"><i class="fas fa-trash"></i> Usuń</a></p>
+<p><a href="#" class="btn btn--warning"><i class="fas fa-exclamation-triangle"></i> Ostrzeżenie</a></p>
+<p><a href="#" class="btn btn--inverse"><i class="fas fa-moon"></i> Tryb nocny</a></p>
+<p><a href="#" class="btn btn--light-outline"><i class="fas fa-info-circle"></i> Info</a></p>
+
+<p><a href="#" class="btn btn--primary btn--large">Duży przycisk</a></p>
+<p><a href="#" class="btn btn--primary btn--small">Mały przycisk</a></p>
+
+<h3>Małe przyciski z różnymi ikonami i kolorami</h3>
+<p><a href="#" class="btn btn--success btn--small"><i class="fas fa-thumbs-up"></i> Like</a></p>
+<p><a href="#" class="btn btn--danger btn--small"><i class="fas fa-times"></i> Anuluj</a></p>
+<p><a href="#" class="btn btn--warning btn--small"><i class="fas fa-bolt"></i> Szybko</a></p>
+<p><a href="#" class="btn btn--inverse btn--small"><i class="fas fa-eye-slash"></i> Ukryj</a></p>
+<p><a href="#" class="btn btn--light-outline btn--small"><i class="fas fa-question"></i> Pomoc</a></p>
+
+<p><a href="#" class="btn btn--primary" disabled>Przycisk nieaktywny</a></p>

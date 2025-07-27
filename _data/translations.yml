@@ -3,10 +3,10 @@
 # Centralna mapa tłumaczeń dla sekcji i stron
 # Każdy wpis to unikalny id sekcji/strony, a pod nim mapowanie locale → url
 posts-index:
-  en-US: /posts/
+  en-US: /en/posts/
   pl-PL: /pl/posts/
 about-index:
-  en-US: /about/
+  en-US: /en/about/
   pl-PL: /pl/about/
 home:
   en-US: /

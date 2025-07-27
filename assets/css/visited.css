@@ -1,3 +1,9 @@
+.archive__item-title a[rel="permalink"]:link {
+  color: #111 !important;
+}
+.archive__item-title a[rel="permalink"]:visited {
+  color: #888 !important;
+}
 /* Styl dla odwiedzonych linków do postów */
 .entries-list a:visited,
 .entries a:visited,

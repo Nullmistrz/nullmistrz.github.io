@@ -7,7 +7,7 @@
         {% unless logo_path == empty %}
           <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt=""></a>
         {% endunless %}
-        <a class="site-title" href="{% if page.locale == 'pl-PL' %}/pl/{% else %}/{% endif %}">
+        <a class="site-title" href="{% if page.locale == 'pl-PL' %}/pl/{% elsif page.locale == 'en-US' %}/en/{% else %}/{% endif %}">
           {{ site.masthead_title | default: site.title }}
           {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
         </a>
