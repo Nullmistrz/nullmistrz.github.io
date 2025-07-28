@@ -11,4 +11,7 @@ about-index:
 home:
   en-US: /
   pl-PL: /pl/
+projects:
+  en-US: /en/projects/
+  pl-PL: /pl/projects/
 # Dodaj kolejne sekcje według potrzeb

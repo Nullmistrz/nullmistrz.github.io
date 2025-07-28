@@ -1,2 +1,16 @@
 source "https://rubygems.org"
-gemspec
+
+gem 'jekyll', '~> 4.3.4'
+gem 'base64'
+gem 'csv'
+gem 'logger'
+gem 'jekyll-paginate'
+gem 'jekyll-sitemap'
+gem 'minimal-mistakes-jekyll', '~> 4.26.1'
+
+group :jekyll_plugins do
+  gem 'jekyll-feed'
+  gem 'jekyll-seo-tag'
+  gem 'jekyll-include-cache'
+  gem 'jekyll-archives'
+end

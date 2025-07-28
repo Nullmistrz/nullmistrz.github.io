@@ -5,6 +5,17 @@ en-US:
       url: /en/
     - title: "Posts"
       url: /en/posts/
+    - title: "Projects"
+      url: /en/projects/
+      children:
+        - title: "SQL"
+          url: /en/projects/sql/
+        - title: "MikroTik"
+          url: /en/projects/mikrotik/
+        - title: "C#"
+          url: /en/projects/csharp/
+        - title: "Esp32/arduino"
+          url: /en/projects/esp32-arduino/
     #- title: "Style Demo"
     #  url: /style-demo/
   more:
@@ -20,6 +31,17 @@ pl-PL:
       url: /pl/
     - title: "Posty"
       url: /pl/posts/
+    - title: "Projekty"
+      url: /pl/projekty/
+      children:
+        - title: "SQL"
+          url: /pl/projekty/sql/
+        - title: "MikroTik"
+          url: /pl/projekty/mikrotik/
+        - title: "C#"
+          url: /pl/projekty/csharp/
+        - title: "Esp32/arduino"
+          url: /pl/projekty/esp32-arduino/
     #- title: "Style Demo"
     #  url: /style-demo/
   more:

@@ -295,5 +295,8 @@ defaults:
       related: true
 
 # Menu
+# navigation:
+#  main: true
 navigation:
-  main: true
+  - title: main
+    file: navigation.yml
