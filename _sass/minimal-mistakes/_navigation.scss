@@ -1,3 +1,16 @@
+// Efekt podświetlenia tła po najechaniu na link w sidebarze
+.nav__list .nav__items li a:hover,
+.nav__list .nav__items li a.active {
+  background: #fa9c9c !important;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+.nav__list .nav__items li a:hover .nav__sub-title,
+.nav__list .nav__items li a.active .nav__sub-title {
+  background: #fa9c9c !important;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */

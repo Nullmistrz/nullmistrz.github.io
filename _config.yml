@@ -159,6 +159,7 @@ footer:
 include:
   - .htaccess
   - _pages
+  - test-sidebar.html
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -294,8 +295,10 @@ defaults:
       share: true
       related: true
 # Menu
-# navigation:
-#  main: true
 navigation:
   - title: main
-    file: navigation.yml
+    file: navigation-en.yml
+    locale: en-US
+  - title: main
+    file: navigation-pl.yml
+    locale: pl-PL

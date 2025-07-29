@@ -1,0 +1,30 @@
+main:
+  - title: "Strona główna"
+    url: /pl/
+  - title: "Posty"
+    url: /pl/posts/
+  - title: "Projekty"
+    url: /pl/projects/
+    # children:
+    #   - title: "SQL"
+    #     url: /pl/projects/sql/
+    #   - title: "MikroTik"
+    #     url: /pl/projects/mikrotik/
+    #   - title: "C#"
+    #     url: /pl/projects/csharp/
+    #   - title: "Esp32/arduino"
+    #     url: /pl/projects/esp32-arduino/
+  - title: "O mnie"
+    url: /pl/about/
+  - title: "Sitemap"
+    url: /sitemap/
+
+projekty-children:
+  - title: "SQL"
+    url: /pl/projects/sql/
+  - title: "MikroTik"
+    url: /pl/projects/mikrotik/
+  - title: "C#"
+    url: /pl/projects/csharp/
+  - title: "Esp32/arduino"
+    url: /pl/projects/esp32-arduino/

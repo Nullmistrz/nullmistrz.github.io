@@ -32,16 +32,16 @@ pl-PL:
     - title: "Posty"
       url: /pl/posts/
     - title: "Projekty"
-      url: /pl/projekty/
+      url: /pl/projects/
       children:
         - title: "SQL"
-          url: /pl/projekty/sql/
+          url: /pl/projects/sql/
         - title: "MikroTik"
-          url: /pl/projekty/mikrotik/
+          url: /pl/projects/mikrotik/
         - title: "C#"
-          url: /pl/projekty/csharp/
+          url: /pl/projects/csharp/
         - title: "Esp32/arduino"
-          url: /pl/projekty/esp32-arduino/
+          url: /pl/projects/esp32-arduino/
     #- title: "Style Demo"
     #  url: /style-demo/
   more:
