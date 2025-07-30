@@ -1,0 +1,21 @@
+// Kolorowanie liter N i M w tytule masthead
+.title-colored .n {
+  color: #e74c3c;
+}
+.title-colored .m {
+  color: #3498db;
+}
+
+// Styl dla sekcji tłumaczeń postów
+.post-translations {
+  margin-bottom: 1em;
+  font-size: 0.95em;
+}
+.post-translations a {
+  color: #3498db;
+  text-decoration: underline;
+  margin: 0 0.2em;
+}
+.post-translations a:hover {
+  color: #e74c3c;
+}

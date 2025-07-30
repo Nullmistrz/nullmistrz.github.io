@@ -34,6 +34,22 @@ layout: default
       {% endunless %}
 
       <section class="page__content" itemprop="text">
+        {% assign langs = "pl-PL,en-US" | split: "," %}
+        {% assign current_locale = page.locale %}
+        {% assign current_id = page.translation_id %}
+        <div class="post-translations">
+          <span>Wersje językowe:&nbsp;</span>
+          {% assign links = 0 %}
+          {% for lang in langs %}
+            {% if lang != current_locale %}
+              {% assign post = site.posts | where: "translation_id", current_id | where: "locale", lang | first %}
+              {% if post %}
+                <a href="{{ post.url }}">{{ lang }}</a>{% assign links = links | plus: 1 %}{% endif %}
+            {% endif %}
+          {% endfor %}
+          {% if links == 0 %}<span>brak innych wersji</span>{% endif %}
+        </div>
+
         {% if page.toc %}
           <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
             <nav class="toc">

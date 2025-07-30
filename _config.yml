@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "dirt" # "default" # "air", "aqua", "contrast", "dark
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Pro gra mo wa nie"
+title                    : ""
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Mirosław Biernat"
@@ -109,7 +109,7 @@ analytics:
 author:
   name             : "Nullmistrz"
   avatar           : "/assets/images/bio-photo.jpg"
-  bio              : "Pasjonat programowania, technologii i wszystkiego co związane z komputerami..."
+  bio              : "Programowanie..."
   location         : "Warszawa, Poland"
   email            : mtib2k@gmail.com
   links:
@@ -294,6 +294,7 @@ defaults:
       comments: # true
       share: true
       related: true
+      id: ""
 # Menu
 navigation:
   - title: main
