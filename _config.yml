@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "dirt" # "default" # "air", "aqua", "contrast", "dark
 
 # Site Settings
 locale                   : "en-US"
-title                    : ""
+title                    : "Pro gra mo wa nie"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Mirosław Biernat"
@@ -109,7 +109,7 @@ analytics:
 author:
   name             : "Nullmistrz"
   avatar           : "/assets/images/bio-photo.jpg"
-  bio              : "Programowanie..."
+  bio              : "Pasjonat programowania, technologii i wszystkiego co związane z komputerami..."
   location         : "Warszawa, Poland"
   email            : mtib2k@gmail.com
   links:
@@ -159,7 +159,6 @@ footer:
 include:
   - .htaccess
   - _pages
-  - test-sidebar.html
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -294,12 +293,10 @@ defaults:
       comments: # true
       share: true
       related: true
-      id: ""
+
 # Menu
 navigation:
-  - title: main
-    file: navigation-en.yml
-    locale: en-US
-  - title: main
-    file: navigation-pl.yml
-    locale: pl-PL
+  main: true
+
+# Enable copy code button for code blocks
+enable_copy_code_button: true
