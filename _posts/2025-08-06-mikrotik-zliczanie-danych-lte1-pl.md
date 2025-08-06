@@ -1,4 +1,5 @@
 ---
+layout: single
 title: "Chateau LTE18 ax - Zliczanie danych dla interfejsu LTE"
 locale: pl-PL
 date: 2025-08-06
