@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "dirt" # "default" # "air", "aqua", "contrast", "dark
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Pro gra mo wa nie"
+title                    : "NullMistrz"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Mirosław Biernat"
-description              : "An amazing website."
+description              : "Blog o programowaniu, sieciach, automatyzacji i elektronice. Praktyczne porady, skrypty, projekty i rozwiązania problemów."
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -119,9 +119,13 @@ author:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
+    - label: "Serwis X"
+      icon: "/assets/icons/x.svg"
+      # icon: "fab fa-fw fa-x-svg"
+      url: "https://x.com/nullmistrz"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
+      url: "https://x.com/nullmistrz"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
@@ -135,7 +139,7 @@ author:
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
+    - label: "Serwis X"
       icon: "fab fa-fw fa-twitter-square"
       # url:
     - label: "Facebook"
