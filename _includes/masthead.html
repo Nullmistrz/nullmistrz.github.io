@@ -24,7 +24,9 @@
             {%- else -%}
               {%- assign url = link.url | relative_url -%}
             {%- endif -%}
-            <li class="masthead__menu-item">
+            {%- assign page_url_normalized = page.url | append: "/" -%}
+            {%- assign link_url_normalized = link.url | append: "/" -%}
+            <li class="masthead__menu-item{% if page_url_normalized == link_url_normalized or page.url == link.url or page.url == url %} active{% endif %}">
               <a href="{{ url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
             </li>
           {%- endfor -%}

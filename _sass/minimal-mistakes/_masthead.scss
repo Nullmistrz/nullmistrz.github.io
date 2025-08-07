@@ -91,3 +91,11 @@
     font-weight: 700;
   }
 }
+
+// Styl aktywnej pozycji w głównym menu
+.masthead__menu-item.active > a {
+  background: #fa9c9c !important;
+  color: #fff !important;
+  border-radius: 4px;
+  font-weight: bold;
+}

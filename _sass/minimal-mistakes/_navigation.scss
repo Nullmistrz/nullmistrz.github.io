@@ -1,16 +1,3 @@
-// Efekt podświetlenia tła po najechaniu na link w sidebarze
-.nav__list .nav__items li a:hover,
-.nav__list .nav__items li a.active {
-  background: #fa9c9c !important;
-  transition: background 0.2s;
-  border-radius: 4px;
-}
-.nav__list .nav__items li a:hover .nav__sub-title,
-.nav__list .nav__items li a.active .nav__sub-title {
-  background: #fa9c9c !important;
-  transition: background 0.2s;
-  border-radius: 4px;
-}
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
@@ -452,8 +439,8 @@
   }
 
   .active {
-    margin-left: -0.5em;
-    padding-left: 0.5em;
+    margin-left: 0;
+    padding-left: 1.25rem;
     padding-right: 0.5em;
     font-weight: bold;
   }
@@ -576,4 +563,30 @@
   li ul li ul li ul li ul li ul > li a {
     padding-left: 3.25rem
   }
+}
+
+// Efekt podświetlenia tła po najechaniu na link w sidebarze
+.nav__list .nav__items li a:hover,
+.nav__list .nav__items li a.active {
+  background: #fa9c9c !important;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+.nav__list .nav__items li a:hover .nav__sub-title,
+.nav__list .nav__items li a.active .nav__sub-title {
+  background: #fa9c9c !important;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+
+// Ograniczenie szerokości i łamanie tekstu w podmenu sidebaru
+.nav__list .nav__items li a,
+.nav__list .nav__items li a.active {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+  display: block;
+  border-radius: 8px;
 }

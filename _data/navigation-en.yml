@@ -23,10 +23,14 @@ main:
 projects-children:
   - title: "SQL"
     url: /en/projects/sql/
+    icon: "fas fa-database"
   - title: "MikroTik"
     url: /en/projects/mikrotik/
+    icon: "fas fa-network-wired"
   - title: "C#"
     url: /en/projects/csharp/
+    icon: "fas fa-code"
   - title: "Esp32/arduino"
     url: /en/projects/esp32-arduino/
+    icon: "fas fa-microchip"
 
