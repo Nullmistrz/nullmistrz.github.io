@@ -139,7 +139,7 @@ author:
 # Site Footer
 footer:
   links:
-    - label: "Serwis X"
+    - label: "x.com"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://x.com/nullmistrz"
     - label: "Facebook"

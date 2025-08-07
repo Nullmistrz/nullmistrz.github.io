@@ -25,6 +25,8 @@ en-US:
       url: /en/about/
     - title: "Sitemap"
       url: /sitemap/
+    - title: "Logs"
+      url: /en/changelog_nm/
     #- title: "pl-PL"
     #  url: /pl/
 pl-PL:
@@ -44,8 +46,6 @@ pl-PL:
           url: /pl/projects/csharp/
         - title: "Esp32/arduino"
           url: /pl/projects/esp32-arduino/
-    - title: "Logi"
-      url: /pl/changelog_nm/
     #- title: "Style Demo"
     #  url: /style-demo/
   # more:
@@ -53,5 +53,7 @@ pl-PL:
       url: /pl/about/
     - title: "Sitemap"
       url: /sitemap/
+    - title: "Logi"
+      url: /pl/changelog_nm/
     # - title: "en-US"
     #   url: /
