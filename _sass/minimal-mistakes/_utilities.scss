@@ -564,27 +564,3 @@ a.reversefootnote {
     position: static;
   }
 }
-
-// Serwis X icon SVG utility (analogicznie do Font Awesome Twitter)
-// Ujednolicone z .icon i Font Awesome
-// Poprawione wyrównanie i odstępy dla SVG X
-.fa-x-svg {
-  color: #000;
-  fill: currentColor;
-  background: none;
-  border-radius: 0.2em;
-  margin-right: 0.3em;
-  margin-bottom: 0;
-  padding: 0;
-  border: 0;
-  width: 1em;
-  height: 1em;
-  display: inline;
-  line-height: 1;
-  font-size: inherit;
-  vertical-align: middle;
-  object-fit: contain;
-  position: relative;
-  top: -0.1em;
-  /* Możesz dodać inne reguły, np. efekt hover, jeśli chcesz */
-}
