@@ -14,6 +14,8 @@ main:
     #     url: /pl/projects/csharp/
     #   - title: "Esp32/arduino"
     #     url: /pl/projects/esp32-arduino/
+  - title: "Logi"
+    url: /pl/changelog_nm/
   - title: "O mnie"
     url: /pl/about/
   - title: "Sitemap"

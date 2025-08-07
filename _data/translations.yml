@@ -14,4 +14,7 @@ home:
 projects:
   en-US: /en/projects/
   pl-PL: /pl/projects/
+changelog_nm:
+  en-US: /en/changelog_nm/
+  pl-PL: /pl/changelog_nm/
 # Dodaj kolejne sekcje według potrzeb

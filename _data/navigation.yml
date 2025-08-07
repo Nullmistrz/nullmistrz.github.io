@@ -16,9 +16,11 @@ en-US:
           url: /en/projects/csharp/
         - title: "Esp32/arduino"
           url: /en/projects/esp32-arduino/
+    - title: "Logs"
+      url: /en/changelog_nm/
     #- title: "Style Demo"
     #  url: /style-demo/
-  more:
+  # more:
     - title: "About"
       url: /en/about/
     - title: "Sitemap"
@@ -42,9 +44,11 @@ pl-PL:
           url: /pl/projects/csharp/
         - title: "Esp32/arduino"
           url: /pl/projects/esp32-arduino/
+    - title: "Logi"
+      url: /pl/changelog_nm/
     #- title: "Style Demo"
     #  url: /style-demo/
-  more:
+  # more:
     - title: "O mnie"
       url: /pl/about/
     - title: "Sitemap"

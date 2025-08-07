@@ -141,7 +141,7 @@ footer:
   links:
     - label: "Serwis X"
       icon: "fab fa-fw fa-twitter-square"
-      # url:
+      url: "https://x.com/nullmistrz"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url:
