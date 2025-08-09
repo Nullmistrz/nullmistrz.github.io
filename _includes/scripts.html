@@ -9,7 +9,9 @@
   {% endfor %}
 {% else %}
   <script src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
-  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+{% if site.enable_copy_code_button %}
+  <script>window.enable_copy_code_button = true;</script>
+{% endif %}
 {% endif %}
 
 {% if site.search == true or page.layout == "search" %}
