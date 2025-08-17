@@ -3,7 +3,7 @@ layout: single
 title: "Chateau LTE18 ax - Zliczanie danych dla interfejsu LTE"
 locale: pl-PL
 date: 2025-08-06
-last_modified_at: 2025-08-06 20:24:00 +0200
+last_modified_at: 2025-08-17 10:40:00 +0200
 categories: posts
 translation_id: post-mikrotik-zliczanie-danych-lte1-2025-08-06
 ---
@@ -13,6 +13,16 @@ translation_id: post-mikrotik-zliczanie-danych-lte1-2025-08-06
 ### 1.1 Cel i zastosowanie
 
 Przedstawiam autorski skrypt do routerów MikroTik, który umożliwia precyzyjne monitorowanie dziennego zużycia transferu danych na interfejsie LTE. Skrypt jest przeznaczony do uruchamiania cyklicznego (np. co 15/30/60 minut przez Scheduler) i pozwala na sumowanie ilości pobranych (download) oraz wysłanych (upload) danych w ciągu doby. Dzięki temu można łatwo kontrolować limity transferu narzucone przez operatora lub po prostu monitorować własne zużycie.
+
+Skrypt był testowany na routerze MikroTik:
+
+| Model                      | Wersja RouterOS | Status testu |
+|----------------------------|-----------------|--------------|
+| S53UG+5HaxD2HaxD&EG18-EA   | 7.19.1          | OK           |
+| S53UG+5HaxD2HaxD&EG18-EA   | 7.19.4          | W trakcie    |
+
+Tabelka będzie aktualizowana o kolejne wersje systemu RouterOS oraz modele urządzeń.
+
 
 ### 1.2 Zasada działania
 

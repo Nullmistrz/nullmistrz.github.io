@@ -3,7 +3,7 @@ layout: single
 title: "Chateau LTE18 ax - Data Counting for LTE Interface"
 locale: en-US
 date: 2025-08-06
-last_modified_at: 2025-08-06 20:42:00 +0200
+last_modified_at: 2025-08-17 10:40:00 +0200
 categories: posts
 translation_id: post-mikrotik-zliczanie-danych-lte1-2025-08-06
 ---
@@ -13,6 +13,15 @@ translation_id: post-mikrotik-zliczanie-danych-lte1-2025-08-06
 ### 1.1 Purpose and Application
 
 This is a custom script for MikroTik routers that enables precise daily monitoring of data usage on the LTE interface. The script is intended for periodic execution (e.g., every 15/30/60 minutes via Scheduler) and allows you to sum up the amount of downloaded (download) and uploaded (upload) data during the day. This makes it easy to control operator-imposed data limits or simply monitor your own usage.
+
+The script was tested on the following MikroTik router:
+
+| Model                      | RouterOS Version | Test Status |
+|----------------------------|------------------|-------------|
+| S53UG+5HaxD2HaxD&EG18-EA   | 7.19.1           | OK          |
+| S53UG+5HaxD2HaxD&EG18-EA   | 7.19.4           | In progress |
+
+This table will be updated with new RouterOS versions and device models as further tests are performed.
 
 ### 1.2 How It Works
 
