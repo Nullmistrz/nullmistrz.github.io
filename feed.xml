@@ -1,4 +1,217 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-08-17T09:33:07+00:00</updated><id>/feed.xml</id><title type="html">NullMistrz</title><subtitle>Blog o programowaniu, sieciach, automatyzacji i elektronice. Praktyczne porady, skrypty, projekty i rozwiązania problemów.</subtitle><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><entry><title type="html">Chateau LTE18 ax - Data Counting for LTE Interface</title><link href="/posts/mikrotik-zliczanie-danych-lte1-en/" rel="alternate" type="text/html" title="Chateau LTE18 ax - Data Counting for LTE Interface" /><published>2025-08-06T00:00:00+00:00</published><updated>2025-08-17T08:40:00+00:00</updated><id>/posts/mikrotik-zliczanie-danych-lte1-en</id><content type="html" xml:base="/posts/mikrotik-zliczanie-danych-lte1-en/"><![CDATA[<h2 id="1-lte-daily-data-aggregation-script-for-mikrotik">1. LTE Daily Data Aggregation Script for MikroTik</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-08-17T10:39:31+00:00</updated><id>/feed.xml</id><title type="html">NullMistrz</title><subtitle>Blog o programowaniu, sieciach, automatyzacji i elektronice. Praktyczne porady, skrypty, projekty i rozwiązania problemów.</subtitle><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><entry><title type="html">WireGuard – Modern VPN in Practice</title><link href="/posts/wireguard-opis-en/" rel="alternate" type="text/html" title="WireGuard – Modern VPN in Practice" /><published>2025-08-17T00:00:00+00:00</published><updated>2025-08-17T10:00:00+00:00</updated><id>/posts/wireguard-opis-en</id><content type="html" xml:base="/posts/wireguard-opis-en/"><![CDATA[<h2 id="1-what-is-wireguard-for-">1. What is WireGuard for? 🔒🌍</h2>
+
+<p>WireGuard is a modern VPN protocol that allows you to securely connect to a network from anywhere in the world. It helps you protect your privacy, access company or home resources, and secure data transmission in public Wi-Fi networks.</p>
+
+<h3 id="11-key-advantages-of-wireguard-">1.1 Key Advantages of WireGuard 🚀</h3>
+
+<ul>
+  <li><strong>Simple configuration</strong> – quick installation and clear settings.</li>
+  <li><strong>High performance</strong> – minimal latency, fast transfer.</li>
+  <li><strong>Security</strong> – modern cryptography, protection against eavesdropping.</li>
+  <li><strong>Lightweight</strong> – small codebase, low resource usage.</li>
+  <li><strong>Multi-platform support</strong> – Linux, Windows, macOS, Android, iOS.</li>
+</ul>
+
+<hr />
+
+<h2 id="2-wireguard-use-cases-️">2. WireGuard Use Cases 🛡️</h2>
+
+<p>WireGuard is perfect for many scenarios:</p>
+<ul>
+  <li>Remote access to company network 🏢</li>
+  <li>Secure connection to your home while traveling 🏠✈️</li>
+  <li>Data protection in public Wi-Fi networks ☕📶</li>
+  <li>Connecting company branches into a single network 🌐</li>
+</ul>
+
+<hr />
+
+<h2 id="3-how-does-wireguard-work-️">3. How Does WireGuard Work? ⚙️</h2>
+
+<p>WireGuard is based on simple principles:</p>
+<ol>
+  <li>Each user generates a pair of keys (public and private) 🔑</li>
+  <li>Configuration involves exchanging keys and setting IP addresses.</li>
+  <li>The connection is established automatically, without complicated rules.</li>
+  <li>All communication is encrypted and secured.</li>
+</ol>
+
+<hr />
+
+<h2 id="4-example-wireguard-configuration-on-linux-">4. Example WireGuard Configuration on Linux 🐧</h2>
+
+<h3 id="server-configuration">Server configuration</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Interface]</span>
+<span class="py">PrivateKey</span> <span class="p">=</span> <span class="s">&lt;server_private_key&gt;</span>
+<span class="py">Address</span> <span class="p">=</span> <span class="s">10.0.0.1/24</span>
+<span class="py">ListenPort</span> <span class="p">=</span> <span class="s">51820</span>
+
+<span class="c"># Add clients as Peer
+</span><span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;client1_public_key&gt;</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">10.0.0.2/32</span>
+
+<span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;client2_public_key&gt;</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">10.0.0.3/32</span>
+</code></pre></div></div>
+
+<h3 id="client-configuration">Client configuration</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Interface]</span>
+<span class="py">PrivateKey</span> <span class="p">=</span> <span class="s">&lt;client_private_key&gt;</span>
+<span class="py">Address</span> <span class="p">=</span> <span class="s">10.0.0.2/24</span>
+<span class="py">ListenPort</span> <span class="p">=</span> <span class="s">21841</span>
+
+<span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;server_public_key&gt;</span>
+<span class="py">Endpoint</span> <span class="p">=</span> <span class="s">&lt;server_IP_address&gt;:51820</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">0.0.0.0/0</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>The values <code class="language-plaintext highlighter-rouge">&lt;server_private_key&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;client_private_key&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;server_public_key&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;client1_public_key&gt;</code>, etc. are generated with:
+<code class="language-plaintext highlighter-rouge">wg genkey | tee privatekey | wg pubkey &gt; publickey</code></p>
+</blockquote>
+
+<hr />
+
+<h2 id="5-deployment-tips-">5. Deployment Tips 💡</h2>
+
+<ul>
+  <li>Always protect your private keys!</li>
+  <li>Use strong passwords for your system.</li>
+  <li>Keep WireGuard software up to date.</li>
+  <li>Test the connection before deploying in production.</li>
+</ul>
+
+<hr />
+
+<h2 id="6-summary-and-benefits-of-wireguard-">6. Summary and Benefits of WireGuard 🎯</h2>
+
+<p>WireGuard is the perfect solution for individuals and companies who value security, simplicity, and performance. Thanks to its modern architecture and easy configuration, VPN has never been so accessible!</p>
+
+<hr />
+
+<p><strong>Do you have questions or want to see examples for other systems? Let me know in the comments!</strong> 💬</p>
+
+<hr />
+
+<p>🔜 <strong>Coming soon on the blog:</strong>
+Discover practical examples of deploying WireGuard on a MikroTik router and configuring a connection on an Android phone! 📱🛜</p>
+
+<p>Follow upcoming posts to learn how to easily and securely use WireGuard in everyday scenarios – at home and at work. 🚦🏠🏢</p>
+
+<hr />
+
+<p><strong>Source:</strong> <a href="https://www.wireguard.com/">Official WireGuard website</a></p>]]></content><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><category term="posts" /><summary type="html"><![CDATA[1. What is WireGuard for? 🔒🌍]]></summary></entry><entry><title type="html">WireGuard – nowoczesny VPN w praktyce</title><link href="/posts/wireguard-opis-pl/" rel="alternate" type="text/html" title="WireGuard – nowoczesny VPN w praktyce" /><published>2025-08-17T00:00:00+00:00</published><updated>2025-08-17T10:00:00+00:00</updated><id>/posts/wireguard-opis-pl</id><content type="html" xml:base="/posts/wireguard-opis-pl/"><![CDATA[<h2 id="1-wireguard--do-czego-służy-">1. WireGuard – do czego służy? 🔒🌍</h2>
+
+<p>WireGuard to nowoczesny protokół VPN, który umożliwia bezpieczne łączenie się z siecią z dowolnego miejsca na świecie. Dzięki niemu możesz chronić swoją prywatność, uzyskać dostęp do zasobów firmowych lub domowych, a także zabezpieczyć transmisję danych w publicznych sieciach Wi-Fi.</p>
+
+<h3 id="11-najważniejsze-zalety-wireguard-">1.1 Najważniejsze zalety WireGuard 🚀</h3>
+
+<ul>
+  <li><strong>Prostota konfiguracji</strong> – szybka instalacja i przejrzyste ustawienia.</li>
+  <li><strong>Wysoka wydajność</strong> – minimalne opóźnienia, szybki transfer.</li>
+  <li><strong>Bezpieczeństwo</strong> – nowoczesna kryptografia, ochrona przed podsłuchem.</li>
+  <li><strong>Lekkość</strong> – niewielki rozmiar kodu, małe zużycie zasobów.</li>
+  <li>
+    <h2 id="wsparcie-dla-wielu-systemów--linux-windows-macos-android-ios"><strong>Wsparcie dla wielu systemów</strong> – Linux, Windows, macOS, Android, iOS.</h2>
+  </li>
+</ul>
+
+<h2 id="2-zastosowania-wireguard-️">2. Zastosowania WireGuard 🛡️</h2>
+<p>WireGuard sprawdzi się w wielu scenariuszach:</p>
+<ul>
+  <li>Zdalny dostęp do sieci firmowej 🏢</li>
+  <li>Bezpieczne połączenie z domem podczas podróży 🏠✈️</li>
+  <li>Ochrona danych w publicznych sieciach Wi-Fi ☕📶</li>
+  <li>
+    <h2 id="łączenie-oddziałów-firmy-w-jedną-sieć-">Łączenie oddziałów firmy w jedną sieć 🌐</h2>
+  </li>
+</ul>
+
+<h2 id="3-jak-działa-wireguard-️">3. Jak działa WireGuard? ⚙️</h2>
+
+<p>WireGuard opiera się na prostych zasadach:</p>
+<ol>
+  <li>Każdy użytkownik generuje parę kluczy (publiczny i prywatny) 🔑</li>
+  <li>Konfiguracja polega na wymianie kluczy i ustawieniu adresów IP.</li>
+  <li>Połączenie jest zestawiane automatycznie, bez skomplikowanych reguł.</li>
+  <li>Cała komunikacja jest szyfrowana i zabezpieczona.</li>
+</ol>
+
+<hr />
+
+<h2 id="4-przykładowa-konfiguracja-wireguard-na-linuxie-">4. Przykładowa konfiguracja WireGuard na Linuxie 🐧</h2>
+
+<h3 id="konfiguracja-serwera">Konfiguracja serwera</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Interface]</span>
+<span class="py">PrivateKey</span> <span class="p">=</span> <span class="s">&lt;klucz_prywatny_serwera&gt;</span>
+<span class="py">Address</span> <span class="p">=</span> <span class="s">10.0.0.1/24</span>
+<span class="py">ListenPort</span> <span class="p">=</span> <span class="s">51820</span>
+
+<span class="c"># Dodajemy klientów jako Peer
+</span><span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;klucz_publiczny_klienta1&gt;</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">10.0.0.2/32</span>
+
+<span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;klucz_publiczny_klienta2&gt;</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">10.0.0.3/32</span>
+</code></pre></div></div>
+
+<h3 id="konfiguracja-klienta">Konfiguracja klienta</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Interface]</span>
+<span class="py">PrivateKey</span> <span class="p">=</span> <span class="s">&lt;klucz_prywatny_klienta&gt;</span>
+<span class="py">Address</span> <span class="p">=</span> <span class="s">10.0.0.2/24</span>
+<span class="py">ListenPort</span> <span class="p">=</span> <span class="s">21841</span>
+
+<span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;klucz_publiczny_serwera&gt;</span>
+<span class="py">Endpoint</span> <span class="p">=</span> <span class="s">&lt;adres_IP_serwera&gt;:51820</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">0.0.0.0/0</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Wartości <code class="language-plaintext highlighter-rouge">&lt;klucz_prywatny_...&gt;</code> i <code class="language-plaintext highlighter-rouge">&lt;klucz_publiczny_...&gt;</code> generujemy poleceniem:
+<code class="language-plaintext highlighter-rouge">wg genkey | tee privatekey | wg pubkey &gt; publickey</code></p>
+</blockquote>
+
+<hr />
+
+<h2 id="5-wskazówki-wdrożeniowe-">5. Wskazówki wdrożeniowe 💡</h2>
+
+<ul>
+  <li>Zawsze chroń swoje klucze prywatne!</li>
+  <li>Używaj silnych haseł do systemu.</li>
+  <li>Aktualizuj oprogramowanie WireGuard do najnowszej wersji.</li>
+  <li>Testuj połączenie przed wdrożeniem w produkcji.</li>
+</ul>
+
+<hr />
+
+<h2 id="6-podsumowanie-i-zalety-wireguard-">6. Podsumowanie i zalety WireGuard 🎯</h2>
+
+<p>WireGuard to idealne rozwiązanie dla osób i firm, które cenią bezpieczeństwo, prostotę i wydajność. Dzięki nowoczesnej architekturze i łatwej konfiguracji, VPN nigdy nie był tak dostępny!</p>
+
+<hr />
+
+<p><strong>Masz pytania lub chcesz zobaczyć przykłady dla innych systemów? Daj znać w komentarzu!</strong> 💬</p>
+
+<hr />
+
+<p>🔜 <strong>Już wkrótce na blogu:</strong>
+Poznasz praktyczne przykłady wdrożenia WireGuard na routerze MikroTik oraz konfigurację połączenia na telefonie z Androidem! 📱🛜</p>
+
+<p>Śledź kolejne wpisy, aby dowiedzieć się, jak łatwo i bezpiecznie korzystać z WireGuard w codziennych zastosowaniach – zarówno w domu, jak i w firmie. 🚦🏠🏢</p>
+
+<hr />
+
+<p><strong>Źródło:</strong> <a href="https://www.wireguard.com/">Oficjalna strona WireGuard</a></p>]]></content><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><category term="posts" /><summary type="html"><![CDATA[1. WireGuard – do czego służy? 🔒🌍]]></summary></entry><entry><title type="html">Chateau LTE18 ax - Data Counting for LTE Interface</title><link href="/posts/mikrotik-zliczanie-danych-lte1-en/" rel="alternate" type="text/html" title="Chateau LTE18 ax - Data Counting for LTE Interface" /><published>2025-08-06T00:00:00+00:00</published><updated>2025-08-17T08:40:00+00:00</updated><id>/posts/mikrotik-zliczanie-danych-lte1-en</id><content type="html" xml:base="/posts/mikrotik-zliczanie-danych-lte1-en/"><![CDATA[<h2 id="1-lte-daily-data-aggregation-script-for-mikrotik">1. LTE Daily Data Aggregation Script for MikroTik</h2>
 
 <h3 id="11-purpose-and-application">1.1 Purpose and Application</h3>
 

@@ -11,8 +11,8 @@
 <meta charset="utf-8">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-<!-- begin _includes/seo.html --><title>Chateau LTE18 ax - domowy router - NullMistrz</title>
-<meta name="description" content="MikroTik Chateau LTE18 ax to domowy router LTE, który wykorzystuję na co dzień. Nie jest to wpis sponsorowany ani reklama – po prostu dzielę się własnymi doświadczeniami i praktycznymi skryptami, które mogą przydać się innym użytkownikom tego modelu. Na tej stronie będę publikować rozwiązania, które sam stosuję w codziennym użytkowaniu tego urządzenia. ">
+<!-- begin _includes/seo.html --><title>WireGuard – nowoczesny VPN w praktyce - NullMistrz</title>
+<meta name="description" content="1. WireGuard – do czego służy? 🔒🌍 ">
 
 
   <meta name="author" content="Nullmistrz">
@@ -21,32 +21,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="NullMistrz">
-<meta property="og:title" content="Chateau LTE18 ax - domowy router">
-<meta property="og:url" content="/posts/mikrotik-Chateau-LTE18ax-pl/">
+<meta property="og:title" content="WireGuard – nowoczesny VPN w praktyce">
+<meta property="og:url" content="/posts/wireguard-opis-pl/">
 
 
-  <meta property="og:description" content="MikroTik Chateau LTE18 ax to domowy router LTE, który wykorzystuję na co dzień. Nie jest to wpis sponsorowany ani reklama – po prostu dzielę się własnymi doświadczeniami i praktycznymi skryptami, które mogą przydać się innym użytkownikom tego modelu. Na tej stronie będę publikować rozwiązania, które sam stosuję w codziennym użytkowaniu tego urządzenia. ">
-
-
-
+  <meta property="og:description" content="1. WireGuard – do czego służy? 🔒🌍 ">
 
 
 
 
-  <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2025-08-01T06:00:00+00:00">
+  <meta property="article:published_time" content="2025-08-17T00:00:00+00:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2025-08-17T10:00:00+00:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="/posts/mikrotik-Chateau-LTE18ax-pl/">
+
+<link rel="canonical" href="/posts/wireguard-opis-pl/">
 
 
 
@@ -332,15 +332,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Chateau LTE18 ax - domowy router">
-    <meta itemprop="description" content="MikroTik Chateau LTE18 ax to domowy router LTE, który wykorzystuję na co dzień. Nie jest to wpis sponsorowany ani reklama – po prostu dzielę się własnymi doświadczeniami i praktycznymi skryptami, które mogą przydać się innym użytkownikom tego modelu. Na tej stronie będę publikować rozwiązania, które sam stosuję w codziennym użytkowaniu tego urządzenia.">
-    <meta itemprop="datePublished" content="2025-08-01T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2025-08-01T06:00:00+00:00">
+    <meta itemprop="headline" content="WireGuard – nowoczesny VPN w praktyce">
+    <meta itemprop="description" content="1. WireGuard – do czego służy? 🔒🌍">
+    <meta itemprop="datePublished" content="2025-08-17T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-08-17T10:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Chateau LTE18 ax - domowy router
+          <h1 id="page-title" class="page__title" itemprop="headline">WireGuard – nowoczesny VPN w praktyce
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -349,7 +349,7 @@
 
 <span class="read-time-prefix">Czas czytania posta: </span>
 
-  mniej niż 1 minut(y)
+  1 minut(y)
 
 </p>
           
@@ -369,18 +369,120 @@
             
               
               
-                <a href="/posts/mikrotik-Chateau-LTE18ax-en/">en-US</a>
+                <a href="/posts/wireguard-opis-en/">en-US</a>
             
           
           
         </div>
 
         
-        <p>MikroTik Chateau LTE18 ax to domowy router LTE, który wykorzystuję na co dzień. Nie jest to wpis sponsorowany ani reklama – po prostu dzielę się własnymi doświadczeniami i praktycznymi skryptami, które mogą przydać się innym użytkownikom tego modelu. Na tej stronie będę publikować rozwiązania, które sam stosuję w codziennym użytkowaniu tego urządzenia.</p>
+        <h2 id="1-wireguard--do-czego-służy-">1. WireGuard – do czego służy? 🔒🌍</h2>
 
-<p>👉 Zobacz także sekcję <a href="/pl/projects/">Projekty/MikroTik</a>, gdzie znajdziesz więcej praktycznych skryptów i rozwiązań dla tego routera.</p>
+<p>WireGuard to nowoczesny protokół VPN, który umożliwia bezpieczne łączenie się z siecią z dowolnego miejsca na świecie. Dzięki niemu możesz chronić swoją prywatność, uzyskać dostęp do zasobów firmowych lub domowych, a także zabezpieczyć transmisję danych w publicznych sieciach Wi-Fi.</p>
+
+<h3 id="11-najważniejsze-zalety-wireguard-">1.1 Najważniejsze zalety WireGuard 🚀</h3>
+
+<ul>
+  <li><strong>Prostota konfiguracji</strong> – szybka instalacja i przejrzyste ustawienia.</li>
+  <li><strong>Wysoka wydajność</strong> – minimalne opóźnienia, szybki transfer.</li>
+  <li><strong>Bezpieczeństwo</strong> – nowoczesna kryptografia, ochrona przed podsłuchem.</li>
+  <li><strong>Lekkość</strong> – niewielki rozmiar kodu, małe zużycie zasobów.</li>
+  <li>
+    <h2 id="wsparcie-dla-wielu-systemów--linux-windows-macos-android-ios"><strong>Wsparcie dla wielu systemów</strong> – Linux, Windows, macOS, Android, iOS.</h2>
+  </li>
+</ul>
+
+<h2 id="2-zastosowania-wireguard-️">2. Zastosowania WireGuard 🛡️</h2>
+<p>WireGuard sprawdzi się w wielu scenariuszach:</p>
+<ul>
+  <li>Zdalny dostęp do sieci firmowej 🏢</li>
+  <li>Bezpieczne połączenie z domem podczas podróży 🏠✈️</li>
+  <li>Ochrona danych w publicznych sieciach Wi-Fi ☕📶</li>
+  <li>
+    <h2 id="łączenie-oddziałów-firmy-w-jedną-sieć-">Łączenie oddziałów firmy w jedną sieć 🌐</h2>
+  </li>
+</ul>
+
+<h2 id="3-jak-działa-wireguard-️">3. Jak działa WireGuard? ⚙️</h2>
+
+<p>WireGuard opiera się na prostych zasadach:</p>
+<ol>
+  <li>Każdy użytkownik generuje parę kluczy (publiczny i prywatny) 🔑</li>
+  <li>Konfiguracja polega na wymianie kluczy i ustawieniu adresów IP.</li>
+  <li>Połączenie jest zestawiane automatycznie, bez skomplikowanych reguł.</li>
+  <li>Cała komunikacja jest szyfrowana i zabezpieczona.</li>
+</ol>
 
 <hr />
+
+<h2 id="4-przykładowa-konfiguracja-wireguard-na-linuxie-">4. Przykładowa konfiguracja WireGuard na Linuxie 🐧</h2>
+
+<h3 id="konfiguracja-serwera">Konfiguracja serwera</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Interface]</span>
+<span class="py">PrivateKey</span> <span class="p">=</span> <span class="s">&lt;klucz_prywatny_serwera&gt;</span>
+<span class="py">Address</span> <span class="p">=</span> <span class="s">10.0.0.1/24</span>
+<span class="py">ListenPort</span> <span class="p">=</span> <span class="s">51820</span>
+
+<span class="c"># Dodajemy klientów jako Peer
+</span><span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;klucz_publiczny_klienta1&gt;</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">10.0.0.2/32</span>
+
+<span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;klucz_publiczny_klienta2&gt;</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">10.0.0.3/32</span>
+</code></pre></div></div>
+
+<h3 id="konfiguracja-klienta">Konfiguracja klienta</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Interface]</span>
+<span class="py">PrivateKey</span> <span class="p">=</span> <span class="s">&lt;klucz_prywatny_klienta&gt;</span>
+<span class="py">Address</span> <span class="p">=</span> <span class="s">10.0.0.2/24</span>
+<span class="py">ListenPort</span> <span class="p">=</span> <span class="s">21841</span>
+
+<span class="nn">[Peer]</span>
+<span class="py">PublicKey</span> <span class="p">=</span> <span class="s">&lt;klucz_publiczny_serwera&gt;</span>
+<span class="py">Endpoint</span> <span class="p">=</span> <span class="s">&lt;adres_IP_serwera&gt;:51820</span>
+<span class="py">AllowedIPs</span> <span class="p">=</span> <span class="s">0.0.0.0/0</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Wartości <code class="language-plaintext highlighter-rouge">&lt;klucz_prywatny_...&gt;</code> i <code class="language-plaintext highlighter-rouge">&lt;klucz_publiczny_...&gt;</code> generujemy poleceniem:
+<code class="language-plaintext highlighter-rouge">wg genkey | tee privatekey | wg pubkey &gt; publickey</code></p>
+</blockquote>
+
+<hr />
+
+<h2 id="5-wskazówki-wdrożeniowe-">5. Wskazówki wdrożeniowe 💡</h2>
+
+<ul>
+  <li>Zawsze chroń swoje klucze prywatne!</li>
+  <li>Używaj silnych haseł do systemu.</li>
+  <li>Aktualizuj oprogramowanie WireGuard do najnowszej wersji.</li>
+  <li>Testuj połączenie przed wdrożeniem w produkcji.</li>
+</ul>
+
+<hr />
+
+<h2 id="6-podsumowanie-i-zalety-wireguard-">6. Podsumowanie i zalety WireGuard 🎯</h2>
+
+<p>WireGuard to idealne rozwiązanie dla osób i firm, które cenią bezpieczeństwo, prostotę i wydajność. Dzięki nowoczesnej architekturze i łatwej konfiguracji, VPN nigdy nie był tak dostępny!</p>
+
+<hr />
+
+<p><strong>Masz pytania lub chcesz zobaczyć przykłady dla innych systemów? Daj znać w komentarzu!</strong> 💬</p>
+
+<hr />
+
+<p>🔜 <strong>Już wkrótce na blogu:</strong>
+Poznasz praktyczne przykłady wdrożenia WireGuard na routerze MikroTik oraz konfigurację połączenia na telefonie z Androidem! 📱🛜</p>
+
+<p>Śledź kolejne wpisy, aby dowiedzieć się, jak łatwo i bezpiecznie korzystać z WireGuard w codziennych zastosowaniach – zarówno w domu, jak i w firmie. 🚦🏠🏢</p>
+
+<hr />
+
+<p><strong>Źródło:</strong> <a href="https://www.wireguard.com/">Oficjalna strona WireGuard</a></p>
 
         
       </section>
@@ -410,7 +512,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-01T08:00">August 1, 2025, 08:00</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-17T12:00">August 17, 2025, 12:00</time></p>
         
       </footer>
 
@@ -419,23 +521,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Chateau+LTE18+ax+-+domowy+router%20%2Fposts%2Fmikrotik-Chateau-LTE18ax-pl%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=WireGuard+%E2%80%93+nowoczesny+VPN+w+praktyce%20%2Fposts%2Fwireguard-opis-pl%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fmikrotik-Chateau-LTE18ax-pl%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fwireguard-opis-pl%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fmikrotik-Chateau-LTE18ax-pl%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fwireguard-opis-pl%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/posts/mikrotik-Chateau-LTE18ax-en/" class="pagination--pager" title="Chateau LTE18 ax - home router
+      <a href="/posts/wireguard-opis-en/" class="pagination--pager" title="WireGuard – Modern VPN in Practice
 ">Previous</a>
     
     
-      <a href="/posts/mikrotik-zliczanie-danych-lte1-en/" class="pagination--pager" title="Chateau LTE18 ax - Data Counting for LTE Interface
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -459,36 +560,6 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/posts/wireguard-opis-pl/" rel="permalink"><i class="fas fa-link"></i> WireGuard – nowoczesny VPN w praktyce
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-<span class="read-time-prefix">Czas czytania posta: </span>
-
-  2 minut(y)
-
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">1. WireGuard – do czego służy? 🔒🌍
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
         <a href="/posts/wireguard-opis-en/" rel="permalink"><i class="fas fa-link"></i> WireGuard – Modern VPN in Practice
 </a>
       
@@ -500,7 +571,7 @@
 
 <span class="read-time-prefix">Czas czytania posta: </span>
 
-  2 minut(y)
+  1 minut(y)
 
 </p>
     
@@ -566,6 +637,35 @@
     
     <p class="archive__item-excerpt" itemprop="description">1. LTE Daily Data Aggregation Script for MikroTik
 </p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/posts/mikrotik-Chateau-LTE18ax-pl/" rel="permalink"><i class="fas fa-link"></i> Chateau LTE18 ax - domowy router
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+<span class="read-time-prefix">Czas czytania posta: </span>
+
+  mniej niż 1 minut(y)
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">MikroTik Chateau LTE18 ax to domowy router LTE, który wykorzystuję na co dzień. Nie jest to wpis sponsorowany ani reklama – po prostu dzielę się własnymi doś...</p>
   </article>
 </div>
 
