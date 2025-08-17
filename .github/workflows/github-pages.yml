@@ -5,23 +5,31 @@ on:
     branches:
       - miro-pages-0.0.2
 
+permissions:
+  contents: write  # 🔑 To daje dostęp do zapisu w repozytorium
+
 jobs:
   github-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
+
       - name: Install dependencies
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
+
       - name: Build site
         run: bundle exec jekyll build
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+          publish_branch: gh-pages  # 🔧 Upewnij się, że ten branch istnieje
