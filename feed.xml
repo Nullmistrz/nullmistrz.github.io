@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-08-17T09:33:07+00:00</updated><id>/feed.xml</id><title type="html">NullMistrz</title><subtitle>Blog o programowaniu, sieciach, automatyzacji i elektronice. Praktyczne porady, skrypty, projekty i rozwiązania problemów.</subtitle><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><entry><title type="html">Chateau LTE18 ax - Data Counting for LTE Interface</title><link href="/posts/mikrotik-zliczanie-danych-lte1-en/" rel="alternate" type="text/html" title="Chateau LTE18 ax - Data Counting for LTE Interface" /><published>2025-08-06T00:00:00+00:00</published><updated>2025-08-17T08:40:00+00:00</updated><id>/posts/mikrotik-zliczanie-danych-lte1-en</id><content type="html" xml:base="/posts/mikrotik-zliczanie-danych-lte1-en/"><![CDATA[<h2 id="1-lte-daily-data-aggregation-script-for-mikrotik">1. LTE Daily Data Aggregation Script for MikroTik</h2>
+
+<h3 id="11-purpose-and-application">1.1 Purpose and Application</h3>
+
+<p>This is a custom script for MikroTik routers that enables precise daily monitoring of data usage on the LTE interface. The script is intended for periodic execution (e.g., every 15/30/60 minutes via Scheduler) and allows you to sum up the amount of downloaded (download) and uploaded (upload) data during the day. This makes it easy to control operator-imposed data limits or simply monitor your own usage.</p>
+
+<p>The script was tested on the following MikroTik router:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>RouterOS Version</th>
+      <th>Test Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>S53UG+5HaxD2HaxD&amp;EG18-EA</td>
+      <td>7.19.1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>S53UG+5HaxD2HaxD&amp;EG18-EA</td>
+      <td>7.19.4</td>
+      <td>In progress</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This table will be updated with new RouterOS versions and device models as further tests are performed.</p>
+
+<h3 id="12-how-it-works">1.2 How It Works</h3>
+
+<h4 id="121-lte-interface-selection">1.2.1 LTE Interface Selection</h4>
+<p>At the beginning of the script, the name of the LTE interface from which statistics will be collected is defined (default: <code class="language-plaintext highlighter-rouge">lte1</code>).</p>
+
+<h4 id="122-reading-current-counters">1.2.2 Reading Current Counters</h4>
+<p>The script reads the current values of bytes received (<code class="language-plaintext highlighter-rouge">rx-byte</code>) and sent (<code class="language-plaintext highlighter-rouge">tx-byte</code>) from the selected interface.</p>
+
+<h4 id="123-handling-global-variables">1.2.3 Handling Global Variables</h4>
+<p>Global variables are used to store the daily sum and the last counter values:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rxPrevAgg</code>, <code class="language-plaintext highlighter-rouge">txPrevAgg</code> – last readings of RX/TX counters</li>
+  <li><code class="language-plaintext highlighter-rouge">globalDownload</code>, <code class="language-plaintext highlighter-rouge">globalUpload</code> – total transfer since the beginning of the day</li>
+</ul>
+
+<p>If the variables do not exist (e.g., after a router restart), they are initialized with appropriate values.</p>
+
+<h4 id="124-calculating-data-increment">1.2.4 Calculating Data Increment</h4>
+<p>The script calculates the difference between the current and previous counter readings. If the counter “rolls over” or the router is restarted, the increment is set to the current counter value.</p>
+
+<h4 id="125-summing-data">1.2.5 Summing Data</h4>
+<p>The calculated increment is added to the daily sum (<code class="language-plaintext highlighter-rouge">globalDownload</code> and <code class="language-plaintext highlighter-rouge">globalUpload</code>).</p>
+
+<h4 id="126-updating-variables">1.2.6 Updating Variables</h4>
+<p>At the end, the script updates the global variables so that the previous state of the counters is known for the next execution.</p>
+
+<h4 id="127-logging">1.2.7 Logging</h4>
+<p>After each aggregation, a log entry is created with information about the increment and the daily sum (in MB).</p>
+
+<h3 id="13-example-script">1.3 Example Script</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Script: LTE Data Aggregation on MikroTik</span>
+<span class="c"># Author: Mirosław Biernat</span>
+<span class="c"># Created: 2025-08-05</span>
+<span class="c"># Last Modified: 2025-08-05</span>
+<span class="c">#</span>
+<span class="c"># Description:</span>
+<span class="c"># Script executed every 15 minutes. On each run, it aggregates the increment of download (RX) and upload (TX) data into the global variables globalDownload and globalUpload. Allows for daily data summing.</span>
+<span class="c">#</span>
+<span class="c"># Version history:</span>
+<span class="c"># - 1.0 (2025-08-05): First production version, RX/TX aggregation into global variables, logging increments and daily sum.</span>
+<span class="c">#</span>
+<span class="c"># Variable descriptions:</span>
+<span class="c"># - rxPrevAgg, txPrevAgg – last RX/TX counter values for comparison on next run</span>
+<span class="c"># - globalDownload, globalUpload – total download/upload since the beginning of the day (in bytes)</span>
+<span class="c"># - deltaRX, deltaTX – increment since last run (in bytes)</span>
+<span class="c"># - iface – LTE interface name</span>
+<span class="c">#</span>
+<span class="c"># Logs provide information about the increment and daily sum after each aggregation.</span>
+
+:local iface <span class="s2">"lte1"</span>
+
+<span class="c"># Get current RX/TX counters (in bytes)</span>
+:local rxNow <span class="o">[</span>/interface get <span class="nv">$iface</span> rx-byte]
+:local txNow <span class="o">[</span>/interface get <span class="nv">$iface</span> tx-byte]
+
+<span class="c"># Get previous values from global variables (if they exist)</span>
+:global rxPrevAgg
+:global txPrevAgg
+:global globalDownload
+:global globalUpload
+
+<span class="c"># Initialize global variables if they do not exist</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$rxPrevAgg</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set rxPrevAgg <span class="nv">$rxNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$txPrevAgg</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set txPrevAgg <span class="nv">$txNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$globalDownload</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set globalDownload 0 <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$globalUpload</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set globalUpload 0 <span class="o">}</span>
+
+<span class="c"># Calculate increment since last run</span>
+:local deltaRX <span class="o">(</span><span class="nv">$rxNow</span> - <span class="nv">$rxPrevAgg</span><span class="o">)</span>
+:local deltaTX <span class="o">(</span><span class="nv">$txNow</span> - <span class="nv">$txPrevAgg</span><span class="o">)</span>
+<span class="k">if</span> <span class="o">(</span><span class="nv">$deltaRX</span> &lt; 0<span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set deltaRX <span class="nv">$rxNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">(</span><span class="nv">$deltaTX</span> &lt; 0<span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set deltaTX <span class="nv">$txNow</span> <span class="o">}</span>
+
+<span class="c"># Add increment to daily sum</span>
+:set globalDownload <span class="o">(</span><span class="nv">$globalDownload</span> + <span class="nv">$deltaRX</span><span class="o">)</span>
+:set globalUpload <span class="o">(</span><span class="nv">$globalUpload</span> + <span class="nv">$deltaTX</span><span class="o">)</span>
+
+<span class="c"># Update global variables for next run</span>
+:set rxPrevAgg <span class="nv">$rxNow</span>
+:set txPrevAgg <span class="nv">$txNow</span>
+
+<span class="c"># Log aggregation</span>
+:log info <span class="o">(</span><span class="s2">"[AGGREGATION] Added to sum: RX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$deltaRX</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB, TX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$deltaTX</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB. Daily sum RX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$globalDownload</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB, TX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$globalUpload</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+</code></pre></div></div>
+<p><strong>Download ready-to-use script file:</strong> <a href="/assets/scripts/lte_day_usage_monitor_AGG.rsc">lte_day_usage_monitor_AGG.rsc</a></p>
+
+<hr />
+<h1 id="script-cooperation">Script Cooperation</h1>
+
+<p>In my case, the first script (aggregation) runs every 59 min 59 sec, and the second – summary – once a day at 23:59:00. This provides full, automatic monitoring and daily LTE data reporting.</p>
+
+<hr />
+
+<h2 id="2-lte-daily-data-summary-script-for-mikrotik--how-it-works">2. LTE Daily Data Summary Script for MikroTik – How It Works</h2>
+
+<h3 id="21-purpose-and-application">2.1 Purpose and Application</h3>
+<p>This script is used to automatically summarize the daily data usage on the LTE interface of a MikroTik router. It is run once a day, preferably just before midnight (e.g., at 23:59), to collect and archive the total values of downloaded and uploaded data for the entire day. This allows for easy daily monitoring and receiving e-mail reports.</p>
+
+<h3 id="22-step-by-step-operation">2.2 Step-by-step Operation</h3>
+<ul>
+  <li>The script reads the total download and upload values from global variables (<code class="language-plaintext highlighter-rouge">globalDownload</code>, <code class="language-plaintext highlighter-rouge">globalUpload</code>), which were aggregated by another script running cyclically during the day.</li>
+  <li>Converts byte values to megabytes (MB) for report readability.</li>
+  <li>Logs daily data usage (download and upload) in the system.</li>
+  <li>Prepares an e-mail message with a daily data summary, including the date and the amount of downloaded and uploaded data.</li>
+  <li>Sends an e-mail to the specified address (can be changed in the <code class="language-plaintext highlighter-rouge">emailTo</code> variable).</li>
+  <li>Resets the global variables <code class="language-plaintext highlighter-rouge">globalDownload</code> and <code class="language-plaintext highlighter-rouge">globalUpload</code> to zero to start summing data for the next day.</li>
+  <li>Logs information about the variable reset.</li>
+</ul>
+
+<h3 id="23-purpose-and-benefits">2.3 Purpose and Benefits</h3>
+<p>The script is a perfect complement to daily LTE data aggregation on MikroTik. It allows for automatic reporting and archiving of data usage, which is especially useful for limited packages or when data usage needs to be accounted for. Thanks to the automatic variable reset, it requires no manual operation and works fully autonomously.</p>
+
+<h3 id="24-implementation-tips">2.4 Implementation Tips</h3>
+<ul>
+  <li>The script should be run once a day, preferably via Scheduler in the evening.</li>
+  <li>The recipient e-mail address can be freely changed in the <code class="language-plaintext highlighter-rouge">emailTo</code> variable.</li>
+  <li>The script requires prior operation of the aggregation script (e.g., <a href="/assets/scripts/lte_day_usage_monitor_AGG.rsc"><code class="language-plaintext highlighter-rouge">lte_day_usage_monitor_AGG.rsc</code></a>), which sums the data during the day.</li>
+</ul>
+
+<hr />
+
+<h3 id="25-daily-data-summary-script-code">2.5 Daily Data Summary Script Code</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Script: LTE Daily Data Summary on MikroTik</span>
+<span class="c"># Author: Mirosław Biernat</span>
+<span class="c"># Created: 2025-08-05</span>
+<span class="c"># Last Modified: 2025-08-05</span>
+<span class="c">#</span>
+<span class="c"># Description:</span>
+<span class="c"># Script run between 23:54–23:59. Reads the total download/upload from global variables globalDownload/globalUpload, logs the summary, sends an e-mail, and resets the variables to zero for the next day.</span>
+<span class="c">#</span>
+<span class="c"># Version history:</span>
+<span class="c"># - 1.0 (2025-08-05): First production version, daily transfer summary and reset, e-mail sending.</span>
+<span class="c">#</span>
+<span class="c"># Variable descriptions:</span>
+<span class="c"># - globalDownload, globalUpload – total download/upload since the beginning of the day (in bytes)</span>
+<span class="c"># - dailyDownloadMB, dailyUploadMB – total transfer in MB</span>
+<span class="c"># - emailTo, emailSubject, emailBody – e-mail sending parameters</span>
+<span class="c">#</span>
+<span class="c"># Logs provide information about the summary and variable reset.</span>
+
+<span class="c"># Get daily sums from aggregation</span>
+:global globalDownload
+:global globalUpload
+
+<span class="c"># Convert to MB</span>
+:local dailyDownloadMB <span class="o">(</span><span class="nv">$globalDownload</span> / 1048576<span class="o">)</span>
+:local dailyUploadMB <span class="o">(</span><span class="nv">$globalUpload</span> / 1048576<span class="o">)</span>
+
+<span class="c"># Log summary</span>
+:log info <span class="o">(</span><span class="s2">"[SUMMARY] Daily data usage: Download: "</span> <span class="nb">.</span> <span class="nv">$dailyDownloadMB</span> <span class="nb">.</span> <span class="s2">" MB, Upload: "</span> <span class="nb">.</span> <span class="nv">$dailyUploadMB</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+
+<span class="c"># Send e-mail with summary</span>
+:local emailTo <span class="s2">"youremail@mail.com"</span>
+:local emailSubject <span class="o">(</span><span class="s2">"LTE1 Daily Summary - "</span> <span class="nb">.</span> <span class="o">[</span>/system clock get <span class="nb">date</span><span class="o">])</span>
+:local emailBody <span class="o">(</span><span class="s2">"Daily data usage:</span><span class="se">\r\n</span><span class="s2">Download: "</span> <span class="nb">.</span> <span class="nv">$dailyDownloadMB</span> <span class="nb">.</span> <span class="s2">" MB</span><span class="se">\r\n</span><span class="s2">Upload: "</span> <span class="nb">.</span> <span class="nv">$dailyUploadMB</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+/tool e-mail send <span class="nv">to</span><span class="o">=</span><span class="nv">$emailTo</span> <span class="nv">subject</span><span class="o">=</span><span class="nv">$emailSubject</span> <span class="nv">body</span><span class="o">=</span><span class="nv">$emailBody</span>
+
+<span class="c"># Reset global variables for the next day</span>
+:set globalDownload 0
+:set globalUpload 0
+
+<span class="c"># Log reset</span>
+:log info <span class="s2">"[SUMMARY] globalDownload and globalUpload global variables reset to 0."</span>
+</code></pre></div></div>
+<p><strong>Download ready-to-use script file:</strong> <a href="/assets/scripts/lte_day_summary.rsc">lte_day_summary.rsc</a></p>]]></content><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><category term="posts" /><summary type="html"><![CDATA[1. LTE Daily Data Aggregation Script for MikroTik]]></summary></entry><entry><title type="html">Chateau LTE18 ax - Zliczanie danych dla interfejsu LTE</title><link href="/posts/mikrotik-zliczanie-danych-lte1-pl/" rel="alternate" type="text/html" title="Chateau LTE18 ax - Zliczanie danych dla interfejsu LTE" /><published>2025-08-06T00:00:00+00:00</published><updated>2025-08-17T08:40:00+00:00</updated><id>/posts/mikrotik-zliczanie-danych-lte1-pl</id><content type="html" xml:base="/posts/mikrotik-zliczanie-danych-lte1-pl/"><![CDATA[<h2 id="1-skrypt-do-dziennej-agregacji-transferu-lte-na-mikrotik">1. Skrypt do dziennej agregacji transferu LTE na MikroTik</h2>
+
+<h3 id="11-cel-i-zastosowanie">1.1 Cel i zastosowanie</h3>
+
+<p>Przedstawiam autorski skrypt do routerów MikroTik, który umożliwia precyzyjne monitorowanie dziennego zużycia transferu danych na interfejsie LTE. Skrypt jest przeznaczony do uruchamiania cyklicznego (np. co 15/30/60 minut przez Scheduler) i pozwala na sumowanie ilości pobranych (download) oraz wysłanych (upload) danych w ciągu doby. Dzięki temu można łatwo kontrolować limity transferu narzucone przez operatora lub po prostu monitorować własne zużycie.</p>
+
+<p>Skrypt był testowany na routerze MikroTik:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Wersja RouterOS</th>
+      <th>Status testu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>S53UG+5HaxD2HaxD&amp;EG18-EA</td>
+      <td>7.19.1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>S53UG+5HaxD2HaxD&amp;EG18-EA</td>
+      <td>7.19.4</td>
+      <td>W trakcie</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Tabelka będzie aktualizowana o kolejne wersje systemu RouterOS oraz modele urządzeń.</p>
+
+<h3 id="12-zasada-działania">1.2 Zasada działania</h3>
+
+<h3 id="121-wybór-interfejsu-lte">1.2.1 Wybór interfejsu LTE</h3>
+<p>Na początku skryptu definiowana jest nazwa interfejsu LTE, z którego będą pobierane statystyki (domyślnie <code class="language-plaintext highlighter-rouge">lte1</code>).</p>
+
+<h3 id="122-pobranie-aktualnych-liczników">1.2.2 Pobranie aktualnych liczników</h3>
+<p>Skrypt odczytuje bieżące wartości liczników bajtów pobranych (<code class="language-plaintext highlighter-rouge">rx-byte</code>) i wysłanych (<code class="language-plaintext highlighter-rouge">tx-byte</code>) z wybranego interfejsu.</p>
+
+<h3 id="123-obsługa-zmiennych-globalnych">1.2.3 Obsługa zmiennych globalnych</h3>
+<p>Do przechowywania sumy dziennej oraz ostatnich wartości liczników wykorzystywane są zmienne globalne:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rxPrevAgg</code>, <code class="language-plaintext highlighter-rouge">txPrevAgg</code> – ostatnie odczyty liczników RX/TX</li>
+  <li><code class="language-plaintext highlighter-rouge">globalDownload</code>, <code class="language-plaintext highlighter-rouge">globalUpload</code> – sumaryczny transfer od początku dnia</li>
+</ul>
+
+<p>Jeśli zmienne nie istnieją (np. po restarcie routera), są inicjalizowane odpowiednimi wartościami.</p>
+
+<h3 id="124-obliczanie-przyrostu-transferu">1.2.4 Obliczanie przyrostu transferu</h3>
+<p>Skrypt wylicza różnicę pomiędzy aktualnym a poprzednim odczytem liczników. Jeśli licznik się „przewinie” lub router zostanie zrestartowany, przyrost jest ustawiany na aktualną wartość licznika.</p>
+
+<h3 id="125-sumowanie-transferu">1.2.5 Sumowanie transferu</h3>
+<p>Obliczony przyrost jest dodawany do sumy dziennej (<code class="language-plaintext highlighter-rouge">globalDownload</code> i <code class="language-plaintext highlighter-rouge">globalUpload</code>).</p>
+
+<h3 id="126-aktualizacja-zmiennych">1.2.6 Aktualizacja zmiennych</h3>
+<p>Na koniec skrypt aktualizuje zmienne globalne, aby przy kolejnym wywołaniu znać poprzedni stan liczników.</p>
+
+<h3 id="127-logowanie">1.2.7 Logowanie</h3>
+<p>Po każdej agregacji do logów systemowych trafia informacja o przyroście transferu oraz sumie dziennej (w MB).</p>
+
+<h3 id="13-przykładowy-kod">1.3 Przykładowy kod</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Skrypt: Agregacja transferu LTE MikroTik</span>
+<span class="c"># Autor: Mirosław Biernat</span>
+<span class="c"># Data utworzenia: 2025-08-05</span>
+<span class="c"># Data ostatniej modyfikacji: 2025-08-05</span>
+<span class="c">#</span>
+<span class="c"># Opis:</span>
+<span class="c"># Skrypt uruchamiany co 15 minut. Przy każdym wywołaniu agreguje przyrost transferu download (RX) i upload (TX) do zmiennych globalnych globalDownload i globalUpload. Pozwala na sumowanie transferu w ciągu dnia.</span>
+<span class="c">#</span>
+<span class="c"># Historia wersji:</span>
+<span class="c"># - 1.0 (2025-08-05): Pierwsza wersja produkcyjna, agregacja RX/TX do zmiennych globalnych, logowanie przyrostów i sumy dziennej.</span>
+<span class="c">#</span>
+<span class="c"># Opis zmiennych:</span>
+<span class="c"># - rxPrevAgg, txPrevAgg – ostatnie wartości liczników RX/TX do porównania przy kolejnym wywołaniu</span>
+<span class="c"># - globalDownload, globalUpload – sumaryczny transfer download/upload od początku dnia (w bajtach)</span>
+<span class="c"># - deltaRX, deltaTX – przyrost transferu od ostatniego wywołania (w bajtach)</span>
+<span class="c"># - iface – nazwa interfejsu LTE</span>
+<span class="c">#</span>
+<span class="c"># Logi informują o przyroście i sumie dziennej po każdej agregacji.</span>
+
+:local iface <span class="s2">"lte1"</span>
+
+<span class="c"># Pobierz aktualne liczniki RX/TX (w bajtach)</span>
+:local rxNow <span class="o">[</span>/interface get <span class="nv">$iface</span> rx-byte]
+:local txNow <span class="o">[</span>/interface get <span class="nv">$iface</span> tx-byte]
+
+<span class="c"># Pobierz poprzednie wartości z globalnych zmiennych (jeśli istnieją)</span>
+:global rxPrevAgg
+:global txPrevAgg
+:global globalDownload
+:global globalUpload
+
+<span class="c"># Inicjalizacja zmiennych globalnych, jeśli nie istnieją</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$rxPrevAgg</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set rxPrevAgg <span class="nv">$rxNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$txPrevAgg</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set txPrevAgg <span class="nv">$txNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$globalDownload</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set globalDownload 0 <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$globalUpload</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set globalUpload 0 <span class="o">}</span>
+
+<span class="c"># Oblicz przyrost transferu od ostatniego wywołania</span>
+:local deltaRX <span class="o">(</span><span class="nv">$rxNow</span> - <span class="nv">$rxPrevAgg</span><span class="o">)</span>
+:local deltaTX <span class="o">(</span><span class="nv">$txNow</span> - <span class="nv">$txPrevAgg</span><span class="o">)</span>
+<span class="k">if</span> <span class="o">(</span><span class="nv">$deltaRX</span> &lt; 0<span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set deltaRX <span class="nv">$rxNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">(</span><span class="nv">$deltaTX</span> &lt; 0<span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set deltaTX <span class="nv">$txNow</span> <span class="o">}</span>
+
+<span class="c"># Dodaj przyrost do sumy dziennej</span>
+:set globalDownload <span class="o">(</span><span class="nv">$globalDownload</span> + <span class="nv">$deltaRX</span><span class="o">)</span>
+:set globalUpload <span class="o">(</span><span class="nv">$globalUpload</span> + <span class="nv">$deltaTX</span><span class="o">)</span>
+
+<span class="c"># Zaktualizuj zmienne globalne do kolejnego wywołania</span>
+:set rxPrevAgg <span class="nv">$rxNow</span>
+:set txPrevAgg <span class="nv">$txNow</span>
+
+<span class="c"># Loguj agregację</span>
+:log info <span class="o">(</span><span class="s2">"[AGGREGACJA] Dodano do sumy: RX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$deltaRX</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB, TX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$deltaTX</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB. Suma dzienna RX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$globalDownload</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB, TX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$globalUpload</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+</code></pre></div></div>
+<hr />
+<h1 id="współpraca-skryptów">Współpraca skryptów</h1>
+
+<p>W moim przypadku pierwszy skrypt (agregujący) uruchamiany jest co 59 min 59 sek, a drugi – podsumowujący – raz na dobę o 23:59:00. Dzięki temu uzyskuję pełny, automatyczny monitoring i raportowanie dziennego transferu LTE.</p>
+
+<hr />
+
+<h2 id="2-skrypt-do-podsumowania-dziennego-transferu-lte-na-mikrotik--opis-działania">2. Skrypt do podsumowania dziennego transferu LTE na MikroTik – opis działania</h2>
+
+<h3 id="21-cel-i-zastosowanie">2.1 Cel i zastosowanie</h3>
+<p>Skrypt służy do automatycznego podsumowania dziennego zużycia transferu danych na interfejsie LTE routera MikroTik. Jest uruchamiany raz dziennie, najlepiej tuż przed północą (np. o 23:59), aby zebrać i zarchiwizować sumaryczne wartości pobranych (download) i wysłanych (upload) danych z całego dnia. Pozwala to na łatwe monitorowanie dziennego transferu oraz otrzymywanie raportów e-mail.</p>
+
+<h3 id="22-zasada-działania-krok-po-kroku">2.2 Zasada działania krok po kroku</h3>
+<ul>
+  <li>Skrypt odczytuje sumaryczne wartości transferu download i upload z globalnych zmiennych (<code class="language-plaintext highlighter-rouge">globalDownload</code>, <code class="language-plaintext highlighter-rouge">globalUpload</code>), które były agregowane przez inny skrypt uruchamiany cyklicznie w ciągu dnia.</li>
+  <li>Przelicza wartości bajtów na megabajty (MB) dla czytelności raportu.</li>
+  <li>Loguje w systemie informację o dziennym zużyciu danych (download i upload).</li>
+  <li>Przygotowuje wiadomość e-mail z podsumowaniem dziennego transferu, zawierającą datę oraz ilość pobranych i wysłanych danych.</li>
+  <li>Wysyła e-mail na wskazany adres (można go zmienić w zmiennej <code class="language-plaintext highlighter-rouge">emailTo</code>).</li>
+  <li>Resetuje zmienne globalne <code class="language-plaintext highlighter-rouge">globalDownload</code> i <code class="language-plaintext highlighter-rouge">globalUpload</code> do zera, aby rozpocząć sumowanie transferu od nowa w kolejnym dniu.</li>
+  <li>Loguje informację o resecie zmiennych.</li>
+</ul>
+
+<h3 id="23-przeznaczenie-i-zalety">2.3 Przeznaczenie i zalety</h3>
+<p>Skrypt jest idealnym uzupełnieniem dziennej agregacji transferu LTE na MikroTik. Pozwala na automatyczne raportowanie i archiwizację zużycia danych, co jest szczególnie przydatne przy limitowanych pakietach lub konieczności rozliczania transferu. Dzięki automatycznemu resetowi zmiennych, nie wymaga ręcznej obsługi i działa w pełni autonomicznie.</p>
+
+<h3 id="24-wskazówki-wdrożeniowe">2.4 Wskazówki wdrożeniowe</h3>
+<ul>
+  <li>Skrypt należy uruchamiać raz dziennie, najlepiej przez Scheduler w godzinach wieczornych.</li>
+  <li>Adres e-mail odbiorcy raportu można dowolnie zmienić w zmiennej <code class="language-plaintext highlighter-rouge">emailTo</code>.</li>
+  <li>Skrypt wymaga wcześniejszego działania skryptu agregującego transfer (np. <a href="/assets/scripts/lte_day_usage_monitor_AGG.rsc"><code class="language-plaintext highlighter-rouge">lte_day_usage_monitor_AGG.rsc</code></a>), który sumuje transfer w ciągu dnia.</li>
+</ul>
+
+<hr />
+
+<h3 id="25-kod-skryptu-dobowego-podsumowania-transferu">2.5 Kod skryptu dobowego podsumowania transferu</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Skrypt: Podsumowanie dziennego transferu LTE MikroTik</span>
+<span class="c"># Autor: Mirosław Biernat</span>
+<span class="c"># Data utworzenia: 2025-08-05</span>
+<span class="c"># Data ostatniej modyfikacji: 2025-08-05</span>
+<span class="c">#</span>
+<span class="c"># Opis:</span>
+<span class="c"># Skrypt uruchamiany w przedziale 23:54–23:59. Odczytuje sumaryczny transfer download/upload z globalnych zmiennych globalDownload/globalUpload, loguje podsumowanie, wysyła e-mail i resetuje zmienne do zera na kolejny dzień.</span>
+<span class="c">#</span>
+<span class="c"># Historia wersji:</span>
+<span class="c"># - 1.0 (2025-08-05): Pierwsza wersja produkcyjna, podsumowanie i reset dziennych sum transferu, wysyłka e-mail.</span>
+<span class="c">#</span>
+<span class="c"># Opis zmiennych:</span>
+<span class="c"># - globalDownload, globalUpload – sumaryczny transfer download/upload od początku dnia (w bajtach)</span>
+<span class="c"># - dailyDownloadMB, dailyUploadMB – sumaryczny transfer w MB</span>
+<span class="c"># - emailTo, emailSubject, emailBody – parametry wysyłki e-maila</span>
+<span class="c">#</span>
+<span class="c"># Logi informują o podsumowaniu i resecie zmiennych.</span>
+
+<span class="c"># Pobierz sumy dzienne z agregacji</span>
+:global globalDownload
+:global globalUpload
+
+<span class="c"># Przelicz na MB</span>
+:local dailyDownloadMB <span class="o">(</span><span class="nv">$globalDownload</span> / 1048576<span class="o">)</span>
+:local dailyUploadMB <span class="o">(</span><span class="nv">$globalUpload</span> / 1048576<span class="o">)</span>
+
+<span class="c"># Loguj podsumowanie</span>
+:log info <span class="o">(</span><span class="s2">"[PODSUMOWANIE] Dzienne zużycie danych: Download: "</span> <span class="nb">.</span> <span class="nv">$dailyDownloadMB</span> <span class="nb">.</span> <span class="s2">" MB, Upload: "</span> <span class="nb">.</span> <span class="nv">$dailyUploadMB</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+
+<span class="c"># Wyślij e-mail z podsumowaniem</span>
+:local emailTo <span class="s2">"twójadresmail@mail.com"</span>
+:local emailSubject <span class="o">(</span><span class="s2">"Podsumowanie dzienne LTE1 - "</span> <span class="nb">.</span> <span class="o">[</span>/system clock get <span class="nb">date</span><span class="o">])</span>
+:local emailBody <span class="o">(</span><span class="s2">"Dzienne zużycie danych:</span><span class="se">\r\n</span><span class="s2">Download: "</span> <span class="nb">.</span> <span class="nv">$dailyDownloadMB</span> <span class="nb">.</span> <span class="s2">" MB</span><span class="se">\r\n</span><span class="s2">Upload: "</span> <span class="nb">.</span> <span class="nv">$dailyUploadMB</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+/tool e-mail send <span class="nv">to</span><span class="o">=</span><span class="nv">$emailTo</span> <span class="nv">subject</span><span class="o">=</span><span class="nv">$emailSubject</span> <span class="nv">body</span><span class="o">=</span><span class="nv">$emailBody</span>
+
+<span class="c"># Resetuj zmienne globalne na kolejny dzień</span>
+:set globalDownload 0
+:set globalUpload 0
+
+<span class="c"># Loguj reset</span>
+:log info <span class="s2">"[PODSUMOWANIE] Zresetowano zmienne globalne globalDownload i globalUpload do 0."</span>
+</code></pre></div></div>
+<p><strong>Pobierz gotowy plik skryptu:</strong> <a href="/assets/scripts/lte_day_summary.rsc">lte_day_summary.rsc</a></p>]]></content><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><category term="posts" /><summary type="html"><![CDATA[1. Skrypt do dziennej agregacji transferu LTE na MikroTik]]></summary></entry><entry><title type="html">Chateau LTE18 ax - home router</title><link href="/posts/mikrotik-Chateau-LTE18ax-en/" rel="alternate" type="text/html" title="Chateau LTE18 ax - home router" /><published>2025-08-01T00:00:00+00:00</published><updated>2025-08-01T06:00:00+00:00</updated><id>/posts/mikrotik-Chateau-LTE18ax-en</id><content type="html" xml:base="/posts/mikrotik-Chateau-LTE18ax-en/"><![CDATA[<p>The MikroTik Chateau LTE18 ax is a home LTE router that I use every day. This is not a sponsored post or advertisement – I simply share my own experiences and practical scripts that may be useful to other users of this model. On this site, I will publish solutions that I personally use in my daily work with this device.</p>
+
+<p>👉 Also check out the <a href="/pl/projects/">Projects/MikroTik</a> section, where you will find more practical scripts and solutions for this router.</p>]]></content><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><category term="posts" /><summary type="html"><![CDATA[The MikroTik Chateau LTE18 ax is a home LTE router that I use every day. This is not a sponsored post or advertisement – I simply share my own experiences and practical scripts that may be useful to other users of this model. On this site, I will publish solutions that I personally use in my daily work with this device.]]></summary></entry><entry><title type="html">Chateau LTE18 ax - domowy router</title><link href="/posts/mikrotik-Chateau-LTE18ax-pl/" rel="alternate" type="text/html" title="Chateau LTE18 ax - domowy router" /><published>2025-08-01T00:00:00+00:00</published><updated>2025-08-01T06:00:00+00:00</updated><id>/posts/mikrotik-Chateau-LTE18ax-pl</id><content type="html" xml:base="/posts/mikrotik-Chateau-LTE18ax-pl/"><![CDATA[<p>MikroTik Chateau LTE18 ax to domowy router LTE, który wykorzystuję na co dzień. Nie jest to wpis sponsorowany ani reklama – po prostu dzielę się własnymi doświadczeniami i praktycznymi skryptami, które mogą przydać się innym użytkownikom tego modelu. Na tej stronie będę publikować rozwiązania, które sam stosuję w codziennym użytkowaniu tego urządzenia.</p>
+
+<p>👉 Zobacz także sekcję <a href="/pl/projects/">Projekty/MikroTik</a>, gdzie znajdziesz więcej praktycznych skryptów i rozwiązań dla tego routera.</p>
+
+<hr />]]></content><author><name>Nullmistrz</name><email>mtib2k@gmail.com</email></author><category term="posts" /><summary type="html"><![CDATA[MikroTik Chateau LTE18 ax to domowy router LTE, który wykorzystuję na co dzień. Nie jest to wpis sponsorowany ani reklama – po prostu dzielę się własnymi doświadczeniami i praktycznymi skryptami, które mogą przydać się innym użytkownikom tego modelu. Na tej stronie będę publikować rozwiązania, które sam stosuję w codziennym użytkowaniu tego urządzenia.]]></summary></entry></feed>

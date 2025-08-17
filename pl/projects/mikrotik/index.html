@@ -1,0 +1,516 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="pl" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- begin _includes/seo.html --><title>Projekty MikroTik - NullMistrz</title>
+<meta name="description" content="Blog o programowaniu, sieciach, automatyzacji i elektronice. Praktyczne porady, skrypty, projekty i rozwiązania problemów. ">
+
+
+  <meta name="author" content="Nullmistrz">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="NullMistrz">
+<meta property="og:title" content="Projekty MikroTik">
+<meta property="og:url" content="/pl/projects/mikrotik/">
+
+
+  <meta property="og:description" content="Blog o programowaniu, sieciach, automatyzacji i elektronice. Praktyczne porady, skrypty, projekty i rozwiązania problemów. ">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/pl/projects/mikrotik/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Mirosław Biernat",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="NullMistrz Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/visited.css">
+
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        
+        <a class="site-title" href="/pl/">
+          <span class="title-colored"><span class="n">N</span>ull<span class="m">M</span>istrz</span>
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pl/" >Strona główna</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pl/posts/" >Posty</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pl/projects/" >Projekty</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pl/about/" >O mnie</a>
+            </li><li class="masthead__menu-item">
+              <a href="/sitemap/" >Sitemap</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pl/changelog_nm/" >Logi</a>
+            </li></ul>
+        <button id="hamburger-menu" class="masthead__menu-item" aria-label="More menu" style="background:none;border:none;font-size:1.5em;cursor:pointer;">&#9776;</button>
+        <ul class="hidden-links" id="hidden-menu" style="display:none;position:absolute;right:0;background:#fff;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,0.15);"></ul>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var btn = document.getElementById('hamburger-menu');
+          var menu = document.getElementById('hidden-menu');
+          if(btn && menu) {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+            };
+            document.body.addEventListener('click', function() {
+              menu.style.display = 'none';
+            });
+            menu.addEventListener('click', function(e) {
+              e.stopPropagation();
+            });
+          }
+        });
+        </script>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Przełącz menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+
+        
+
+
+
+
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/bio-photo.jpg" alt="Nullmistrz" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Nullmistrz</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Pasjonat programowania, technologii i wszystkiego co związane z komputerami…</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Warszawa, Poland</span>
+        </li>
+      
+
+
+      
+        
+          
+        
+          
+        
+          
+            <li>
+              <a href="https://x.com/nullmistrz" rel="nofollow noopener noreferrer">
+                
+                  <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i>
+                
+                Serwis X
+              </a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mtib2k@gmail.com">
+            <meta itemprop="email" content="mtib2k@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+
+    
+      <li>
+        
+          
+          
+          <a href="/pl/projects/sql/" class=""><span class="nav__sub-title">SQL</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+          
+          
+          <a href="/pl/projects/mikrotik/" class="active"><span class="nav__sub-title">MikroTik</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+          
+          
+          <a href="/pl/projects/csharp/" class=""><span class="nav__sub-title">C#</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+          
+          
+          <a href="/pl/projects/esp32-arduino/" class=""><span class="nav__sub-title">Esp32/arduino</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Projekty MikroTik">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Projekty MikroTik
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        
+        
+        <div class="post-translations">
+          <span>Wersje językowe:&nbsp;</span>
+          
+          
+            
+          
+            
+              
+              
+            
+          
+          <span>brak innych wersji</span>
+        </div>
+
+        
+        <p>Znajdziesz tu opisy, skrypty i rozwiązania związane z urządzeniami MikroTik.</p>
+
+<!-- Dodaj tutaj kolejne wpisy/projekty -->
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Śledź:</strong></li>
+    
+
+    
+      
+        
+          <li>
+            <a href="https://x.com/nullmistrz" rel="nofollow noopener noreferrer">
+              
+                <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i>
+              
+              x.com
+            </a>
+          </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Mirosław Biernat. Powstało dzięki <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+  <script>window.enable_copy_code_button = true;</script>
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

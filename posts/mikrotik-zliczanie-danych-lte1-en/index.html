@@ -1,0 +1,807 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- begin _includes/seo.html --><title>Chateau LTE18 ax - Data Counting for LTE Interface - NullMistrz</title>
+<meta name="description" content="1. LTE Daily Data Aggregation Script for MikroTik ">
+
+
+  <meta name="author" content="Nullmistrz">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="NullMistrz">
+<meta property="og:title" content="Chateau LTE18 ax - Data Counting for LTE Interface">
+<meta property="og:url" content="/posts/mikrotik-zliczanie-danych-lte1-en/">
+
+
+  <meta property="og:description" content="1. LTE Daily Data Aggregation Script for MikroTik ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-08-06T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-08-17T08:40:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/mikrotik-zliczanie-danych-lte1-en/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Mirosław Biernat",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="NullMistrz Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/visited.css">
+
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        
+        <a class="site-title" href="/en/">
+          <span class="title-colored"><span class="n">N</span>ull<span class="m">M</span>istrz</span>
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/en/" >Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/en/posts/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/en/projects/" >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/en/changelog_nm/" >Logs</a>
+            </li><li class="masthead__menu-item">
+              <a href="/en/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/sitemap/" >Sitemap</a>
+            </li><li class="masthead__menu-item">
+              <a href="/en/changelog_nm/" >Logs</a>
+            </li></ul>
+        <button id="hamburger-menu" class="masthead__menu-item" aria-label="More menu" style="background:none;border:none;font-size:1.5em;cursor:pointer;">&#9776;</button>
+        <ul class="hidden-links" id="hidden-menu" style="display:none;position:absolute;right:0;background:#fff;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,0.15);"></ul>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var btn = document.getElementById('hamburger-menu');
+          var menu = document.getElementById('hidden-menu');
+          if(btn && menu) {
+            btn.onclick = function(e) {
+              e.stopPropagation();
+              menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+            };
+            document.body.addEventListener('click', function() {
+              menu.style.display = 'none';
+            });
+            menu.addEventListener('click', function(e) {
+              e.stopPropagation();
+            });
+          }
+        });
+        </script>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+
+        
+
+
+
+
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/bio-photo.jpg" alt="Nullmistrz" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Nullmistrz</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Pasjonat programowania, technologii i wszystkiego co związane z komputerami…</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Warszawa, Poland</span>
+        </li>
+      
+
+
+      
+        
+          
+        
+          
+        
+          
+            <li>
+              <a href="https://x.com/nullmistrz" rel="nofollow noopener noreferrer">
+                
+                  <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i>
+                
+                Serwis X
+              </a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mtib2k@gmail.com">
+            <meta itemprop="email" content="mtib2k@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Chateau LTE18 ax - Data Counting for LTE Interface">
+    <meta itemprop="description" content="1. LTE Daily Data Aggregation Script for MikroTik">
+    <meta itemprop="datePublished" content="2025-08-06T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-08-17T08:40:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Chateau LTE18 ax - Data Counting for LTE Interface
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+<span class="read-time-prefix">Reading time: </span>
+
+  6 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        
+        
+        <div class="post-translations">
+          <span>Wersje językowe:&nbsp;</span>
+          
+          
+            
+              
+              
+                <a href="/posts/mikrotik-zliczanie-danych-lte1-pl/">pl-PL</a>
+            
+          
+            
+          
+          
+        </div>
+
+        
+        <h2 id="1-lte-daily-data-aggregation-script-for-mikrotik">1. LTE Daily Data Aggregation Script for MikroTik</h2>
+
+<h3 id="11-purpose-and-application">1.1 Purpose and Application</h3>
+
+<p>This is a custom script for MikroTik routers that enables precise daily monitoring of data usage on the LTE interface. The script is intended for periodic execution (e.g., every 15/30/60 minutes via Scheduler) and allows you to sum up the amount of downloaded (download) and uploaded (upload) data during the day. This makes it easy to control operator-imposed data limits or simply monitor your own usage.</p>
+
+<p>The script was tested on the following MikroTik router:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>RouterOS Version</th>
+      <th>Test Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>S53UG+5HaxD2HaxD&amp;EG18-EA</td>
+      <td>7.19.1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>S53UG+5HaxD2HaxD&amp;EG18-EA</td>
+      <td>7.19.4</td>
+      <td>In progress</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This table will be updated with new RouterOS versions and device models as further tests are performed.</p>
+
+<h3 id="12-how-it-works">1.2 How It Works</h3>
+
+<h4 id="121-lte-interface-selection">1.2.1 LTE Interface Selection</h4>
+<p>At the beginning of the script, the name of the LTE interface from which statistics will be collected is defined (default: <code class="language-plaintext highlighter-rouge">lte1</code>).</p>
+
+<h4 id="122-reading-current-counters">1.2.2 Reading Current Counters</h4>
+<p>The script reads the current values of bytes received (<code class="language-plaintext highlighter-rouge">rx-byte</code>) and sent (<code class="language-plaintext highlighter-rouge">tx-byte</code>) from the selected interface.</p>
+
+<h4 id="123-handling-global-variables">1.2.3 Handling Global Variables</h4>
+<p>Global variables are used to store the daily sum and the last counter values:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rxPrevAgg</code>, <code class="language-plaintext highlighter-rouge">txPrevAgg</code> – last readings of RX/TX counters</li>
+  <li><code class="language-plaintext highlighter-rouge">globalDownload</code>, <code class="language-plaintext highlighter-rouge">globalUpload</code> – total transfer since the beginning of the day</li>
+</ul>
+
+<p>If the variables do not exist (e.g., after a router restart), they are initialized with appropriate values.</p>
+
+<h4 id="124-calculating-data-increment">1.2.4 Calculating Data Increment</h4>
+<p>The script calculates the difference between the current and previous counter readings. If the counter “rolls over” or the router is restarted, the increment is set to the current counter value.</p>
+
+<h4 id="125-summing-data">1.2.5 Summing Data</h4>
+<p>The calculated increment is added to the daily sum (<code class="language-plaintext highlighter-rouge">globalDownload</code> and <code class="language-plaintext highlighter-rouge">globalUpload</code>).</p>
+
+<h4 id="126-updating-variables">1.2.6 Updating Variables</h4>
+<p>At the end, the script updates the global variables so that the previous state of the counters is known for the next execution.</p>
+
+<h4 id="127-logging">1.2.7 Logging</h4>
+<p>After each aggregation, a log entry is created with information about the increment and the daily sum (in MB).</p>
+
+<h3 id="13-example-script">1.3 Example Script</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Script: LTE Data Aggregation on MikroTik</span>
+<span class="c"># Author: Mirosław Biernat</span>
+<span class="c"># Created: 2025-08-05</span>
+<span class="c"># Last Modified: 2025-08-05</span>
+<span class="c">#</span>
+<span class="c"># Description:</span>
+<span class="c"># Script executed every 15 minutes. On each run, it aggregates the increment of download (RX) and upload (TX) data into the global variables globalDownload and globalUpload. Allows for daily data summing.</span>
+<span class="c">#</span>
+<span class="c"># Version history:</span>
+<span class="c"># - 1.0 (2025-08-05): First production version, RX/TX aggregation into global variables, logging increments and daily sum.</span>
+<span class="c">#</span>
+<span class="c"># Variable descriptions:</span>
+<span class="c"># - rxPrevAgg, txPrevAgg – last RX/TX counter values for comparison on next run</span>
+<span class="c"># - globalDownload, globalUpload – total download/upload since the beginning of the day (in bytes)</span>
+<span class="c"># - deltaRX, deltaTX – increment since last run (in bytes)</span>
+<span class="c"># - iface – LTE interface name</span>
+<span class="c">#</span>
+<span class="c"># Logs provide information about the increment and daily sum after each aggregation.</span>
+
+:local iface <span class="s2">"lte1"</span>
+
+<span class="c"># Get current RX/TX counters (in bytes)</span>
+:local rxNow <span class="o">[</span>/interface get <span class="nv">$iface</span> rx-byte]
+:local txNow <span class="o">[</span>/interface get <span class="nv">$iface</span> tx-byte]
+
+<span class="c"># Get previous values from global variables (if they exist)</span>
+:global rxPrevAgg
+:global txPrevAgg
+:global globalDownload
+:global globalUpload
+
+<span class="c"># Initialize global variables if they do not exist</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$rxPrevAgg</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set rxPrevAgg <span class="nv">$rxNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$txPrevAgg</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set txPrevAgg <span class="nv">$txNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$globalDownload</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set globalDownload 0 <span class="o">}</span>
+<span class="k">if</span> <span class="o">([</span>:typeof <span class="nv">$globalUpload</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">"num"</span><span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set globalUpload 0 <span class="o">}</span>
+
+<span class="c"># Calculate increment since last run</span>
+:local deltaRX <span class="o">(</span><span class="nv">$rxNow</span> - <span class="nv">$rxPrevAgg</span><span class="o">)</span>
+:local deltaTX <span class="o">(</span><span class="nv">$txNow</span> - <span class="nv">$txPrevAgg</span><span class="o">)</span>
+<span class="k">if</span> <span class="o">(</span><span class="nv">$deltaRX</span> &lt; 0<span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set deltaRX <span class="nv">$rxNow</span> <span class="o">}</span>
+<span class="k">if</span> <span class="o">(</span><span class="nv">$deltaTX</span> &lt; 0<span class="o">)</span> <span class="k">do</span><span class="o">={</span> :set deltaTX <span class="nv">$txNow</span> <span class="o">}</span>
+
+<span class="c"># Add increment to daily sum</span>
+:set globalDownload <span class="o">(</span><span class="nv">$globalDownload</span> + <span class="nv">$deltaRX</span><span class="o">)</span>
+:set globalUpload <span class="o">(</span><span class="nv">$globalUpload</span> + <span class="nv">$deltaTX</span><span class="o">)</span>
+
+<span class="c"># Update global variables for next run</span>
+:set rxPrevAgg <span class="nv">$rxNow</span>
+:set txPrevAgg <span class="nv">$txNow</span>
+
+<span class="c"># Log aggregation</span>
+:log info <span class="o">(</span><span class="s2">"[AGGREGATION] Added to sum: RX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$deltaRX</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB, TX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$deltaTX</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB. Daily sum RX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$globalDownload</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB, TX: "</span> <span class="nb">.</span> <span class="o">(</span><span class="nv">$globalUpload</span> / 1048576<span class="o">)</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+</code></pre></div></div>
+<p><strong>Download ready-to-use script file:</strong> <a href="/assets/scripts/lte_day_usage_monitor_AGG.rsc">lte_day_usage_monitor_AGG.rsc</a></p>
+
+<hr />
+<h1 id="script-cooperation">Script Cooperation</h1>
+
+<p>In my case, the first script (aggregation) runs every 59 min 59 sec, and the second – summary – once a day at 23:59:00. This provides full, automatic monitoring and daily LTE data reporting.</p>
+
+<hr />
+
+<h2 id="2-lte-daily-data-summary-script-for-mikrotik--how-it-works">2. LTE Daily Data Summary Script for MikroTik – How It Works</h2>
+
+<h3 id="21-purpose-and-application">2.1 Purpose and Application</h3>
+<p>This script is used to automatically summarize the daily data usage on the LTE interface of a MikroTik router. It is run once a day, preferably just before midnight (e.g., at 23:59), to collect and archive the total values of downloaded and uploaded data for the entire day. This allows for easy daily monitoring and receiving e-mail reports.</p>
+
+<h3 id="22-step-by-step-operation">2.2 Step-by-step Operation</h3>
+<ul>
+  <li>The script reads the total download and upload values from global variables (<code class="language-plaintext highlighter-rouge">globalDownload</code>, <code class="language-plaintext highlighter-rouge">globalUpload</code>), which were aggregated by another script running cyclically during the day.</li>
+  <li>Converts byte values to megabytes (MB) for report readability.</li>
+  <li>Logs daily data usage (download and upload) in the system.</li>
+  <li>Prepares an e-mail message with a daily data summary, including the date and the amount of downloaded and uploaded data.</li>
+  <li>Sends an e-mail to the specified address (can be changed in the <code class="language-plaintext highlighter-rouge">emailTo</code> variable).</li>
+  <li>Resets the global variables <code class="language-plaintext highlighter-rouge">globalDownload</code> and <code class="language-plaintext highlighter-rouge">globalUpload</code> to zero to start summing data for the next day.</li>
+  <li>Logs information about the variable reset.</li>
+</ul>
+
+<h3 id="23-purpose-and-benefits">2.3 Purpose and Benefits</h3>
+<p>The script is a perfect complement to daily LTE data aggregation on MikroTik. It allows for automatic reporting and archiving of data usage, which is especially useful for limited packages or when data usage needs to be accounted for. Thanks to the automatic variable reset, it requires no manual operation and works fully autonomously.</p>
+
+<h3 id="24-implementation-tips">2.4 Implementation Tips</h3>
+<ul>
+  <li>The script should be run once a day, preferably via Scheduler in the evening.</li>
+  <li>The recipient e-mail address can be freely changed in the <code class="language-plaintext highlighter-rouge">emailTo</code> variable.</li>
+  <li>The script requires prior operation of the aggregation script (e.g., <a href="/assets/scripts/lte_day_usage_monitor_AGG.rsc"><code class="language-plaintext highlighter-rouge">lte_day_usage_monitor_AGG.rsc</code></a>), which sums the data during the day.</li>
+</ul>
+
+<hr />
+
+<h3 id="25-daily-data-summary-script-code">2.5 Daily Data Summary Script Code</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Script: LTE Daily Data Summary on MikroTik</span>
+<span class="c"># Author: Mirosław Biernat</span>
+<span class="c"># Created: 2025-08-05</span>
+<span class="c"># Last Modified: 2025-08-05</span>
+<span class="c">#</span>
+<span class="c"># Description:</span>
+<span class="c"># Script run between 23:54–23:59. Reads the total download/upload from global variables globalDownload/globalUpload, logs the summary, sends an e-mail, and resets the variables to zero for the next day.</span>
+<span class="c">#</span>
+<span class="c"># Version history:</span>
+<span class="c"># - 1.0 (2025-08-05): First production version, daily transfer summary and reset, e-mail sending.</span>
+<span class="c">#</span>
+<span class="c"># Variable descriptions:</span>
+<span class="c"># - globalDownload, globalUpload – total download/upload since the beginning of the day (in bytes)</span>
+<span class="c"># - dailyDownloadMB, dailyUploadMB – total transfer in MB</span>
+<span class="c"># - emailTo, emailSubject, emailBody – e-mail sending parameters</span>
+<span class="c">#</span>
+<span class="c"># Logs provide information about the summary and variable reset.</span>
+
+<span class="c"># Get daily sums from aggregation</span>
+:global globalDownload
+:global globalUpload
+
+<span class="c"># Convert to MB</span>
+:local dailyDownloadMB <span class="o">(</span><span class="nv">$globalDownload</span> / 1048576<span class="o">)</span>
+:local dailyUploadMB <span class="o">(</span><span class="nv">$globalUpload</span> / 1048576<span class="o">)</span>
+
+<span class="c"># Log summary</span>
+:log info <span class="o">(</span><span class="s2">"[SUMMARY] Daily data usage: Download: "</span> <span class="nb">.</span> <span class="nv">$dailyDownloadMB</span> <span class="nb">.</span> <span class="s2">" MB, Upload: "</span> <span class="nb">.</span> <span class="nv">$dailyUploadMB</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+
+<span class="c"># Send e-mail with summary</span>
+:local emailTo <span class="s2">"youremail@mail.com"</span>
+:local emailSubject <span class="o">(</span><span class="s2">"LTE1 Daily Summary - "</span> <span class="nb">.</span> <span class="o">[</span>/system clock get <span class="nb">date</span><span class="o">])</span>
+:local emailBody <span class="o">(</span><span class="s2">"Daily data usage:</span><span class="se">\r\n</span><span class="s2">Download: "</span> <span class="nb">.</span> <span class="nv">$dailyDownloadMB</span> <span class="nb">.</span> <span class="s2">" MB</span><span class="se">\r\n</span><span class="s2">Upload: "</span> <span class="nb">.</span> <span class="nv">$dailyUploadMB</span> <span class="nb">.</span> <span class="s2">" MB"</span><span class="o">)</span>
+/tool e-mail send <span class="nv">to</span><span class="o">=</span><span class="nv">$emailTo</span> <span class="nv">subject</span><span class="o">=</span><span class="nv">$emailSubject</span> <span class="nv">body</span><span class="o">=</span><span class="nv">$emailBody</span>
+
+<span class="c"># Reset global variables for the next day</span>
+:set globalDownload 0
+:set globalUpload 0
+
+<span class="c"># Log reset</span>
+:log info <span class="s2">"[SUMMARY] globalDownload and globalUpload global variables reset to 0."</span>
+</code></pre></div></div>
+<p><strong>Download ready-to-use script file:</strong> <a href="/assets/scripts/lte_day_summary.rsc">lte_day_summary.rsc</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#posts" class="page__taxonomy-item" rel="tag">posts</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-17T10:40">August 17, 2025, 10:40</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Chateau+LTE18+ax+-+Data+Counting+for+LTE+Interface%20%2Fposts%2Fmikrotik-zliczanie-danych-lte1-en%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fmikrotik-zliczanie-danych-lte1-en%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fmikrotik-zliczanie-danych-lte1-en%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/posts/mikrotik-Chateau-LTE18ax-pl/" class="pagination--pager" title="Chateau LTE18 ax - domowy router
+">Previous</a>
+    
+    
+      <a href="/posts/mikrotik-zliczanie-danych-lte1-pl/" class="pagination--pager" title="Chateau LTE18 ax - Zliczanie danych dla interfejsu LTE
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/posts/mikrotik-zliczanie-danych-lte1-pl/" rel="permalink"><i class="fas fa-link"></i> Chateau LTE18 ax - Zliczanie danych dla interfejsu LTE
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+<span class="read-time-prefix">Reading time: </span>
+
+  5 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">1. Skrypt do dziennej agregacji transferu LTE na MikroTik
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/posts/mikrotik-Chateau-LTE18ax-pl/" rel="permalink"><i class="fas fa-link"></i> Chateau LTE18 ax - domowy router
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+<span class="read-time-prefix">Reading time: </span>
+
+  less than 1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">MikroTik Chateau LTE18 ax to domowy router LTE, który wykorzystuję na co dzień. Nie jest to wpis sponsorowany ani reklama – po prostu dzielę się własnymi doś...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/posts/mikrotik-Chateau-LTE18ax-en/" rel="permalink"><i class="fas fa-link"></i> Chateau LTE18 ax - home router
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+<span class="read-time-prefix">Reading time: </span>
+
+  less than 1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">The MikroTik Chateau LTE18 ax is a home LTE router that I use every day. This is not a sponsored post or advertisement – I simply share my own experiences an...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li>
+            <a href="https://x.com/nullmistrz" rel="nofollow noopener noreferrer">
+              
+                <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i>
+              
+              x.com
+            </a>
+          </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Mirosław Biernat. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+  <script>window.enable_copy_code_button = true;</script>
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
